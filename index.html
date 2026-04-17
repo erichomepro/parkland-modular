@@ -1,0 +1,3444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parkland Modular — Operations Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   PARKLAND MODULAR — VISION BOARD
+   Industrial Intelligence • Built for Builders
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Industrial palette */
+  --bg: #0a0f1c;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --surface3: #1e293b;
+  --border: rgba(251,191,36,0.15);
+  --border2: rgba(255,255,255,0.06);
+
+  /* Brand colors — industrial gold + safety orange + steel blue */
+  --gold: #fbbf24;
+  --gold-dim: rgba(251,191,36,0.7);
+  --gold-glow: rgba(251,191,36,0.25);
+  --orange: #f97316;
+  --orange-glow: rgba(249,115,22,0.2);
+  --steel: #60a5fa;
+  --steel-glow: rgba(96,165,250,0.2);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.8);
+  --green-glow: rgba(52,211,153,0.15);
+  --red: #f87171;
+  --cyan: #22d3ee;
+  --purple: #a78bfa;
+
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+
+  --display: 'Unbounded', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Ambient background */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 800px 600px at 15% 8%, rgba(251,191,36,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 800px at 85% 25%, rgba(96,165,250,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 500px at 50% 85%, rgba(52,211,153,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid pattern overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(251,191,36,0.05);
+  margin-bottom: 32px;
+}
+
+.hero-badge .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--gold-glow); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 8px transparent; }
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 20px;
+  color: var(--text-dim);
+  max-width: 700px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.hero-sub strong {
+  color: var(--gold);
+}
+
+/* Growth target banner */
+.growth-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(249,115,22,0.08));
+  border: 1px solid rgba(251,191,36,0.2);
+  border-radius: var(--radius);
+  margin-top: 12px;
+}
+
+.growth-number {
+  font-family: var(--display);
+  font-size: 42px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--gold), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.growth-label {
+  text-align: left;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.growth-label strong {
+  color: var(--text);
+  display: block;
+  font-size: 16px;
+}
+
+.growth-arrow {
+  font-size: 32px;
+  color: var(--gold);
+  animation: bounce-right 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION STYLING
+   ═══════════════════════════════════════════════════════════════ */
+section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.badge-gold { color: var(--gold); background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.15); }
+.badge-steel { color: var(--steel); background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.15); }
+.badge-green { color: var(--green); background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.15); }
+.badge-orange { color: var(--orange); background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.15); }
+.badge-cyan { color: var(--cyan); background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.15); }
+.badge-purple { color: var(--purple); background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.15); }
+
+section h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+section .section-desc {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 680px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PROMISE CARDS — "What Changes For You"
+   ═══════════════════════════════════════════════════════════════ */
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.promise-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.promise-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.promise-card:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
+}
+
+.promise-card:hover::before { opacity: 1; }
+
+.promise-card.card-gold::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+.promise-card.card-steel::before { background: linear-gradient(90deg, var(--steel), var(--cyan)); }
+.promise-card.card-green::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+.promise-card.card-orange::before { background: linear-gradient(90deg, var(--orange), var(--red)); }
+
+.promise-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.promise-card h3 {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.promise-card p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ROLE CARDS — "Where YOU Fit"
+   ═══════════════════════════════════════════════════════════════ */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .role-grid { grid-template-columns: 1fr; }
+}
+
+.role-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.role-card:hover {
+  border-color: var(--border);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px -16px rgba(0,0,0,0.4);
+}
+
+.role-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.role-avatar {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.role-avatar.owner { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(249,115,22,0.1)); }
+.role-avatar.manager { background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(34,211,238,0.1)); }
+.role-avatar.worker { background: linear-gradient(135deg, rgba(52,211,153,0.15), rgba(34,211,238,0.1)); }
+.role-avatar.admin { background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(96,165,250,0.1)); }
+
+.role-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.role-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.role-benefits {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.role-benefits li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.role-benefits li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.role-quote {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold-dim);
+  padding: 14px 16px;
+  background: rgba(251,191,36,0.04);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODULE SECTIONS — Deep Dives
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Phone mockup */
+.phone-mockup {
+  width: 300px;
+  min-height: 520px;
+  background: #000;
+  border-radius: 36px;
+  border: 3px solid #333;
+  padding: 16px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+  flex-shrink: 0;
+}
+
+.phone-notch {
+  width: 120px;
+  height: 28px;
+  background: #000;
+  border-radius: 0 0 18px 18px;
+  margin: -16px auto 12px;
+  position: relative;
+  z-index: 2;
+  border: 3px solid #333;
+  border-top: none;
+}
+
+.phone-screen {
+  background: var(--surface2);
+  border-radius: 22px;
+  padding: 20px 16px;
+  min-height: 440px;
+}
+
+.phone-status-bar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-family: var(--mono);
+}
+
+.phone-header {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Module layout */
+.module-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+
+.module-layout.reverse {
+  grid-template-columns: 340px 1fr;
+}
+
+@media (max-width: 900px) {
+  .module-layout,
+  .module-layout.reverse {
+    grid-template-columns: 1fr;
+  }
+  .phone-mockup { margin: 32px auto; }
+}
+
+.module-content h3 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.module-content > p {
+  color: var(--text-dim);
+  font-size: 15px;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+/* Feature list within modules */
+.feature-list {
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.feature-list li {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border2);
+  align-items: flex-start;
+}
+
+.feature-list li:last-child { border-bottom: none; }
+
+.feature-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+}
+
+.feature-text strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.feature-text span {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Phone UI elements */
+.app-task {
+  background: var(--surface3);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--text-muted);
+  transition: all 0.3s;
+}
+
+.app-task.active { border-left-color: var(--gold); }
+.app-task.complete { border-left-color: var(--green); opacity: 0.7; }
+.app-task.safety { border-left-color: var(--orange); }
+
+.app-task-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.app-task-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+.app-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 12px;
+  transition: all 0.3s;
+}
+
+.app-btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--orange));
+  color: #000;
+}
+
+.app-btn-green {
+  background: linear-gradient(135deg, var(--green), #06b6d4);
+  color: #000;
+}
+
+.app-btn-orange {
+  background: linear-gradient(135deg, var(--orange), var(--red));
+  color: #fff;
+}
+
+.app-btn-steel {
+  background: linear-gradient(135deg, var(--steel), var(--purple));
+  color: #fff;
+}
+
+/* Timer display */
+.timer-display {
+  text-align: center;
+  padding: 20px;
+  background: rgba(251,191,36,0.06);
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+
+.timer-po {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.timer-trailer {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.timer-time {
+  font-family: var(--mono);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 2px;
+}
+
+.timer-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Progress bars */
+.progress-bar-wrap {
+  margin-bottom: 12px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.progress-label span:first-child { color: var(--text-dim); }
+.progress-label span:last-child { color: var(--gold); font-weight: 600; }
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 0;
+}
+
+.progress-fill.gold { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+.progress-fill.green { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+.progress-fill.steel { background: linear-gradient(90deg, var(--steel), var(--cyan)); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PIPELINE VISUALIZATION
+   ═══════════════════════════════════════════════════════════════ */
+.pipeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.pipeline-line {
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--orange), var(--green), var(--steel), var(--purple));
+}
+
+.pipeline-step {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 24px 0;
+  position: relative;
+}
+
+.pipeline-node {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 3px solid;
+  background: var(--bg);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  margin-left: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.pipeline-step:nth-child(1) .pipeline-node { border-color: var(--gold); color: var(--gold); }
+.pipeline-step:nth-child(2) .pipeline-node { border-color: var(--orange); color: var(--orange); }
+.pipeline-step:nth-child(3) .pipeline-node { border-color: var(--green); color: var(--green); }
+.pipeline-step:nth-child(4) .pipeline-node { border-color: var(--steel); color: var(--steel); }
+.pipeline-step:nth-child(5) .pipeline-node { border-color: var(--cyan); color: var(--cyan); }
+.pipeline-step:nth-child(6) .pipeline-node { border-color: var(--purple); color: var(--purple); }
+
+.pipeline-body {
+  flex: 1;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  border: 1px solid var(--border2);
+}
+
+.pipeline-body h4 {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.pipeline-body p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DASHBOARD MOCKUP (Manager/Owner view)
+   ═══════════════════════════════════════════════════════════════ */
+.dashboard-mockup {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5);
+}
+
+.dash-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--border2);
+}
+
+.dash-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.dash-dot.r { background: #ef4444; }
+.dash-dot.y { background: #fbbf24; }
+.dash-dot.g { background: #22c55e; }
+
+.dash-url {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+
+.dash-body {
+  padding: 24px;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.dash-stat {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.dash-stat-value {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.dash-stat-value.gold { color: var(--gold); }
+.dash-stat-value.green { color: var(--green); }
+.dash-stat-value.steel { color: var(--steel); }
+.dash-stat-value.orange { color: var(--orange); }
+
+.dash-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+.dash-trailers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .dash-trailers { grid-template-columns: 1fr; }
+}
+
+.dash-trailer {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  border: 1px solid var(--border2);
+}
+
+.dash-trailer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dash-trailer-id {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.dash-trailer-status {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status-progress { background: rgba(251,191,36,0.12); color: var(--gold); }
+.status-review { background: rgba(96,165,250,0.12); color: var(--steel); }
+.status-complete { background: rgba(52,211,153,0.12); color: var(--green); }
+
+.dash-trailer-type {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SAFETY SECTION — Special Treatment
+   ═══════════════════════════════════════════════════════════════ */
+.safety-hero {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.06), rgba(251,191,36,0.04));
+  border: 1px solid rgba(249,115,22,0.12);
+  border-radius: var(--radius);
+  margin-bottom: 48px;
+}
+
+.safety-hero .big-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.safety-hero h3 {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.safety-hero p {
+  font-size: 15px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.safety-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.safety-step {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.safety-step-num {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px; height: 24px;
+  background: var(--orange);
+  color: #000;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.safety-step-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.safety-step h4 {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.safety-step p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INCENTIVE SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.incentive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.incentive-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.4s;
+}
+
+.incentive-card:hover {
+  border-color: rgba(52,211,153,0.2);
+  transform: translateY(-3px);
+}
+
+.incentive-icon {
+  font-size: 42px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.incentive-card h4 {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.incentive-card p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MORNING RUN SHEET
+   ═══════════════════════════════════════════════════════════════ */
+.run-sheet {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.run-sheet-header {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(249,115,22,0.06));
+  border-bottom: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.run-sheet-title {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.run-sheet-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+
+.run-stop {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border2);
+}
+
+.run-stop:last-child { border-bottom: none; }
+
+.run-stop-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.run-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.run-check {
+  width: 16px; height: 16px;
+  border: 2px solid var(--text-muted);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.run-check.done {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.run-trailer-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: rgba(251,191,36,0.1);
+  color: var(--gold-dim);
+  border-radius: 4px;
+  font-family: var(--mono);
+  margin-left: auto;
+}
+
+.run-total {
+  padding: 14px 24px;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MARKETING PIPELINE
+   ═══════════════════════════════════════════════════════════════ */
+.marketing-flow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.mkt-node {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 18px 22px;
+  text-align: center;
+  min-width: 140px;
+}
+
+.mkt-node-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.mkt-node-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.mkt-arrow {
+  font-size: 24px;
+  color: var(--gold);
+  animation: bounce-right 1.5s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUILD PHASES TIMELINE
+   ═══════════════════════════════════════════════════════════════ */
+.phase-timeline {
+  position: relative;
+  padding-left: 60px;
+}
+
+.phase-timeline::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--gold) 0%,
+    var(--orange) 20%,
+    var(--green) 40%,
+    var(--steel) 60%,
+    var(--cyan) 80%,
+    var(--purple) 100%
+  );
+}
+
+.phase-item {
+  position: relative;
+  margin-bottom: 28px;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+}
+
+.phase-item:hover {
+  border-color: var(--border);
+}
+
+.phase-dot {
+  position: absolute;
+  left: -48px;
+  top: 28px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 3px solid;
+}
+
+.phase-item:nth-child(1) .phase-dot { border-color: var(--gold); background: var(--bg); }
+.phase-item:nth-child(2) .phase-dot { border-color: var(--orange); background: var(--bg); }
+.phase-item:nth-child(3) .phase-dot { border-color: var(--green); background: var(--bg); }
+.phase-item:nth-child(4) .phase-dot { border-color: var(--steel); background: var(--bg); }
+.phase-item:nth-child(5) .phase-dot { border-color: var(--cyan); background: var(--bg); }
+.phase-item:nth-child(6) .phase-dot { border-color: var(--purple); background: var(--bg); }
+.phase-item:nth-child(7) .phase-dot { border-color: var(--gold); background: var(--bg); }
+
+.phase-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.phase-item:nth-child(1) .phase-num { color: var(--gold); }
+.phase-item:nth-child(2) .phase-num { color: var(--orange); }
+.phase-item:nth-child(3) .phase-num { color: var(--green); }
+.phase-item:nth-child(4) .phase-num { color: var(--steel); }
+.phase-item:nth-child(5) .phase-num { color: var(--cyan); }
+.phase-item:nth-child(6) .phase-num { color: var(--purple); }
+.phase-item:nth-child(7) .phase-num { color: var(--gold); }
+
+.phase-item h4 {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.phase-item p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.phase-modules {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.phase-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tag-inv { background: rgba(251,191,36,0.1); color: var(--gold); }
+.tag-prod { background: rgba(249,115,22,0.1); color: var(--orange); }
+.tag-safe { background: rgba(52,211,153,0.1); color: var(--green); }
+.tag-admin { background: rgba(96,165,250,0.1); color: var(--steel); }
+.tag-mkt { background: rgba(167,139,250,0.1); color: var(--purple); }
+.tag-ai { background: rgba(34,211,238,0.1); color: var(--cyan); }
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER CTA
+   ═══════════════════════════════════════════════════════════════ */
+.cta-section {
+  text-align: center;
+  padding: 80px 0 100px;
+}
+
+.cta-section h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff, var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cta-section p {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(249,115,22,0.08));
+  border: 1px solid rgba(251,191,36,0.2);
+  border-radius: var(--radius);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.powered-by {
+  margin-top: 48px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONNECTOR ARROWS (between sections)
+   ═══════════════════════════════════════════════════════════════ */
+.connector {
+  text-align: center;
+  padding: 24px 0;
+  font-size: 24px;
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VALUE IMPACT BOXES
+   ═══════════════════════════════════════════════════════════════ */
+.impact-box {
+  background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(34,211,238,0.04));
+  border: 1px solid rgba(52,211,153,0.12);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.impact-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.impact-text strong {
+  display: block;
+  font-size: 14px;
+  color: var(--green);
+  margin-bottom: 3px;
+}
+
+.impact-text span {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Offline indicator */
+.offline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.2);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--orange);
+  margin-top: 10px;
+}
+
+.offline-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Checklist animation */
+@keyframes check-in {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Nav dots */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+@media (max-width: 900px) {
+  .nav-dots { display: none; }
+}
+
+.nav-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  padding: 0;
+}
+
+.nav-dot:hover,
+.nav-dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 12px var(--gold-glow);
+  transform: scale(1.3);
+}
+
+/* Table of contents */
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.toc a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.toc a:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOTION GRAPHICS — PARTICLE CANVAS
+   ═══════════════════════════════════════════════════════════════ */
+#particleCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED GRADIENT BORDERS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(251,191,36,0.12); box-shadow: 0 0 0px transparent; }
+  50% { border-color: rgba(251,191,36,0.3); box-shadow: 0 0 20px rgba(251,191,36,0.08); }
+}
+
+.promise-card:hover, .role-card:hover, .incentive-card:hover {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COUNTER ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+.counter-animate {
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FLOATING ELEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-12px) rotate(1deg); }
+  75% { transform: translateY(8px) rotate(-1deg); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-18px) rotate(2deg); }
+  66% { transform: translateY(10px) rotate(-1.5deg); }
+}
+
+.phone-mockup {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.run-sheet {
+  animation: float-medium 7s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLOWING PULSE FOR ACTIVE ELEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes glow-pulse-gold {
+  0%, 100% { box-shadow: 0 0 8px rgba(251,191,36,0.2), 0 0 24px rgba(251,191,36,0.05); }
+  50% { box-shadow: 0 0 16px rgba(251,191,36,0.4), 0 0 48px rgba(251,191,36,0.1); }
+}
+
+@keyframes glow-pulse-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(52,211,153,0.2), 0 0 24px rgba(52,211,153,0.05); }
+  50% { box-shadow: 0 0 16px rgba(52,211,153,0.4), 0 0 48px rgba(52,211,153,0.1); }
+}
+
+@keyframes glow-pulse-orange {
+  0%, 100% { box-shadow: 0 0 8px rgba(249,115,22,0.2), 0 0 24px rgba(249,115,22,0.05); }
+  50% { box-shadow: 0 0 16px rgba(249,115,22,0.4), 0 0 48px rgba(249,115,22,0.1); }
+}
+
+.app-btn-gold { animation: glow-pulse-gold 3s ease-in-out infinite; }
+.app-btn-green { animation: glow-pulse-green 3s ease-in-out infinite; }
+.app-btn-orange { animation: glow-pulse-orange 3s ease-in-out infinite; }
+
+.timer-display {
+  animation: glow-pulse-gold 4s ease-in-out infinite;
+  border: 1px solid rgba(251,191,36,0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STAGGERED REVEAL ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes slide-up-fade {
+  from { opacity: 0; transform: translateY(60px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes blur-in {
+  from { opacity: 0; filter: blur(12px); transform: translateY(20px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transition: none;
+}
+.reveal-slide-left.visible {
+  animation: slide-in-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transition: none;
+}
+.reveal-slide-right.visible {
+  animation: slide-in-right 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transition: none;
+}
+.reveal-scale.visible {
+  animation: scale-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-blur {
+  opacity: 0;
+  transition: none;
+}
+.reveal-blur.visible {
+  animation: blur-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED BACKGROUND MESH GRADIENTS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes mesh-shift {
+  0% { background-position: 0% 50%, 100% 50%, 50% 100%; }
+  25% { background-position: 100% 0%, 0% 100%, 80% 20%; }
+  50% { background-position: 50% 100%, 50% 0%, 0% 50%; }
+  75% { background-position: 0% 80%, 100% 20%, 100% 80%; }
+  100% { background-position: 0% 50%, 100% 50%, 50% 100%; }
+}
+
+.hero {
+  background:
+    radial-gradient(ellipse 600px 400px at var(--mesh-x1, 20%) var(--mesh-y1, 30%), rgba(251,191,36,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at var(--mesh-x2, 80%) var(--mesh-y2, 60%), rgba(96,165,250,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 300px at var(--mesh-x3, 50%) var(--mesh-y3, 80%), rgba(52,211,153,0.04) 0%, transparent 70%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SPARKLE ON GROWTH NUMBERS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes sparkle {
+  0%, 100% { text-shadow: 0 0 10px rgba(251,191,36,0.3); }
+  25% { text-shadow: 0 0 20px rgba(251,191,36,0.6), 0 0 40px rgba(251,191,36,0.2); }
+  50% { text-shadow: 0 0 10px rgba(249,115,22,0.3); }
+  75% { text-shadow: 0 0 25px rgba(249,115,22,0.5), 0 0 50px rgba(249,115,22,0.2); }
+}
+
+.growth-number {
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PIPELINE STEP ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes pipeline-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 transparent; }
+  50% { transform: scale(1.15); }
+}
+
+.pipeline-node {
+  transition: all 0.3s;
+}
+
+.pipeline-step:hover .pipeline-node {
+  animation: pipeline-pulse 1s ease-in-out;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED PIPELINE LINE
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes line-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 200%; }
+}
+
+.pipeline-line {
+  background: linear-gradient(180deg, var(--gold), var(--orange), var(--green), var(--steel), var(--purple), var(--gold));
+  background-size: 100% 200%;
+  animation: line-flow 6s linear infinite;
+}
+
+.phase-timeline::before {
+  background: linear-gradient(180deg, var(--gold), var(--orange), var(--green), var(--steel), var(--cyan), var(--purple), var(--gold));
+  background-size: 100% 200%;
+  animation: line-flow 8s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DASHBOARD SCAN LINE
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes scan-line {
+  0% { top: 0; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.dashboard-mockup {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-mockup::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: scan-line 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION DIVIDER ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes divider-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.section-divider {
+  animation: divider-glow 3s ease-in-out infinite;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--orange) 40%, var(--green) 60%, var(--steel) 80%, transparent 100%);
+  background-size: 200% 100%;
+  animation: divider-glow 3s ease-in-out infinite, divider-shift 8s linear infinite;
+}
+
+@keyframes divider-shift {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SAFETY SECTION SPECIAL EFFECTS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes shield-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(52,211,153,0.2)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(52,211,153,0.4)); }
+}
+
+.safety-hero .big-icon {
+  animation: shield-pulse 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes safety-step-enter {
+  from { opacity: 0; transform: translateY(30px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.safety-step {
+  transition: all 0.4s;
+}
+
+.safety-step:hover {
+  transform: translateY(-6px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 40px -12px rgba(249,115,22,0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MARKETING FLOW ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes node-pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.mkt-node {
+  transition: all 0.3s;
+}
+
+.mkt-node:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 30px -8px rgba(251,191,36,0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INCENTIVE TROPHY ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes trophy-bounce {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-8px) rotate(-3deg); }
+  75% { transform: translateY(-4px) rotate(3deg); }
+}
+
+.incentive-card:hover .incentive-icon {
+  animation: trophy-bounce 0.8s ease-in-out;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO ANIMATED GRID
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.015; }
+  50% { opacity: 0.04; }
+}
+
+body::after {
+  animation: grid-pulse 6s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DATA FLOW LINES (between sections)
+   ═══════════════════════════════════════════════════════════════ */
+.connector {
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.connector::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  animation: line-flow 3s linear infinite;
+}
+
+/* Typing cursor for quotes */
+@keyframes blink-cursor {
+  0%, 100% { border-right-color: var(--gold); }
+  50% { border-right-color: transparent; }
+}
+
+.role-quote::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: var(--gold);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+/* CTA Section Glow */
+.cta-section {
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(251,191,36,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  animation: float-slow 10s ease-in-out infinite;
+}
+</style>
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- NAV DOTS -->
+<div class="nav-dots" id="navDots">
+  <button class="nav-dot active" data-target="hero" title="Top"></button>
+  <button class="nav-dot" data-target="promise" title="The Promise"></button>
+  <button class="nav-dot" data-target="roles" title="Your Role"></button>
+  <button class="nav-dot" data-target="production" title="Production"></button>
+  <button class="nav-dot" data-target="time" title="Time & POs"></button>
+  <button class="nav-dot" data-target="inventory" title="Inventory"></button>
+  <button class="nav-dot" data-target="morning" title="Morning Run"></button>
+  <button class="nav-dot" data-target="safety" title="Safety"></button>
+  <button class="nav-dot" data-target="admin" title="Admin Hub"></button>
+  <button class="nav-dot" data-target="marketing" title="Marketing"></button>
+  <button class="nav-dot" data-target="incentives" title="Incentives"></button>
+  <button class="nav-dot" data-target="roadmap" title="Roadmap"></button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-badge reveal">
+      <span class="dot"></span>
+      Operations Intelligence Platform
+    </div>
+
+    <h1 class="reveal reveal-delay-1">Build Smarter.<br>Work Safer.<br>Grow Bigger.</h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      One platform that connects <strong>every trailer, every worker, every part, and every dollar</strong> — from the shop floor to the front office. Built for Parkland Modular.
+    </p>
+
+    <div class="growth-banner reveal reveal-delay-3">
+      <div>
+        <div class="growth-number">$10M</div>
+        <div class="growth-label">Today</div>
+      </div>
+      <div class="growth-arrow">→</div>
+      <div>
+        <div class="growth-number">$15M+</div>
+        <div class="growth-label"><strong>The Target</strong>Through efficiency, safety &amp; systems</div>
+      </div>
+    </div>
+
+    <div class="toc reveal reveal-delay-4">
+      <a href="#promise">🎯 The Promise</a>
+      <a href="#roles">👥 Your Role</a>
+      <a href="#production">🔧 Production</a>
+      <a href="#time">⏱ Time Tracking</a>
+      <a href="#inventory">📦 Inventory</a>
+      <a href="#morning">🚛 Morning Run</a>
+      <a href="#safety">🛡 Safety</a>
+      <a href="#admin">📊 Admin Hub</a>
+      <a href="#marketing">📸 Marketing</a>
+      <a href="#incentives">🏆 Incentives</a>
+      <a href="#roadmap">🗺 Roadmap</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE PROMISE — What Changes For Everyone
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="promise">
+  <div class="container">
+    <div class="section-badge badge-gold reveal">🎯 The Promise</div>
+    <h2 class="reveal-blur">This Isn't About Replacing Anyone.<br>It's About <span style="color:var(--gold)">Making Everyone Better.</span></h2>
+    <p class="section-desc reveal">
+      Every person at Parkland Modular is important. Your jobs are safe. What changes is this: the frustrating parts of work — chasing down parts, tracking hours on paper, wondering if something got missed — that goes away. What replaces it is a system that has your back.
+    </p>
+
+    <div class="promise-grid">
+      <div class="promise-card card-green reveal">
+        <span class="promise-icon">🛡</span>
+        <h3>Safer Every Day</h3>
+        <p>AI-powered safety procedures make sure you have the right PPE, the right tools, and the right knowledge before every job. Nobody gets hurt because something was overlooked.</p>
+      </div>
+      <div class="promise-card card-gold reveal reveal-delay-1">
+        <span class="promise-icon">⏱</span>
+        <h3>Your Hours, Accurately Tracked</h3>
+        <p>No more guessing at timesheets. Tap in when you start, tap out when you switch. Every hour is recorded to the right job, so your pay is always right.</p>
+      </div>
+      <div class="promise-card card-steel reveal reveal-delay-2">
+        <span class="promise-icon">📦</span>
+        <h3>The Right Parts, Ready When You Need Them</h3>
+        <p>The system knows what you need before you do. Morning run sheets mean one trip, not ten. No more stopping work because someone forgot to order fasteners.</p>
+      </div>
+      <div class="promise-card card-orange reveal reveal-delay-3">
+        <span class="promise-icon">📋</span>
+        <h3>Nothing Gets Missed</h3>
+        <p>Every task on every trailer has a checklist. Sign off when it's done, snap a photo, and move on. The work you do is documented and respected.</p>
+      </div>
+    </div>
+
+    <div class="promise-grid" style="max-width:640px; margin:0 auto;">
+      <div class="promise-card card-gold reveal">
+        <span class="promise-icon">💰</span>
+        <h3>More Revenue, More Fun</h3>
+        <p>When the company saves money through efficiency and wins bigger contracts through safety compliance, everyone benefits. Better margins mean better opportunities for the whole team.</p>
+      </div>
+      <div class="promise-card card-steel reveal reveal-delay-1">
+        <span class="promise-icon">📱</span>
+        <h3>One App, In Your Pocket</h3>
+        <p>Download it once. Everything lives there — your tasks, your time, your safety forms, your materials. No paper. No spreadsheets. No confusion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHERE YOU FIT — Role-Based Views
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="roles">
+  <div class="container">
+    <div class="section-badge badge-steel reveal">👥 Where You Fit</div>
+    <h2 class="reveal-blur">Everyone Sees <span style="color:var(--steel)">What Matters To Them</span></h2>
+    <p class="section-desc reveal">
+      Same platform, different views. Each person sees exactly what they need — nothing more, nothing less. The right information at the right time.
+    </p>
+
+    <div class="role-grid">
+      <!-- OWNER -->
+      <div class="role-card reveal">
+        <div class="role-header">
+          <div class="role-avatar owner">👑</div>
+          <div>
+            <div class="role-title">Owner & Leadership</div>
+            <div class="role-subtitle">The big picture — everything, everywhere, in real time</div>
+          </div>
+        </div>
+        <ul class="role-benefits">
+          <li>See every active PO, its budget vs actual cost, and profitability — live</li>
+          <li>Know which trailers are on schedule and which are falling behind</li>
+          <li>Monitor safety compliance rates across the entire company</li>
+          <li>Track inventory spend, labor costs, and margins at a glance</li>
+          <li>Drill down from company overview into any trailer, any worker, any job</li>
+          <li>Know exactly what your company is worth in work-in-progress, right now</li>
+        </ul>
+        <div class="role-quote">"I open one screen and I know exactly where every dollar is, where every trailer is, and how every crew is doing. No phone calls. No guessing."</div>
+      </div>
+
+      <!-- MANAGER -->
+      <div class="role-card reveal reveal-delay-1">
+        <div class="role-header">
+          <div class="role-avatar manager">🎯</div>
+          <div>
+            <div class="role-title">Managers & Supervisors</div>
+            <div class="role-subtitle">Your crew, your trailers, your call</div>
+          </div>
+        </div>
+        <ul class="role-benefits">
+          <li>Assign tasks to workers and see completion in real time</li>
+          <li>Review sign-offs with photos before approving a trailer as complete</li>
+          <li>Know who's working on what, right now, across all your trailers</li>
+          <li>Get alerts when tasks are blocked, behind schedule, or need attention</li>
+          <li>Approve material checkouts and see what's been consumed per job</li>
+          <li>Safety dashboard — see who's done their pre-job forms today</li>
+        </ul>
+        <div class="role-quote">"I used to walk the floor checking on everything. Now I check my tablet, handle the exceptions, and spend more time solving problems instead of chasing status updates."</div>
+      </div>
+
+      <!-- WORKER -->
+      <div class="role-card reveal reveal-delay-2">
+        <div class="role-header">
+          <div class="role-avatar worker">🔧</div>
+          <div>
+            <div class="role-title">Workers & Tradespeople</div>
+            <div class="role-subtitle">Your tasks, your time, your tools — all in your pocket</div>
+          </div>
+        </div>
+        <ul class="role-benefits">
+          <li>Open the app, see exactly what you need to do today — no confusion</li>
+          <li>Track your hours with one tap — switch between trailers instantly</li>
+          <li>Sign out materials with a scan — no paper forms, no lost receipts</li>
+          <li>Complete safety checklists on your phone in 30 seconds</li>
+          <li>Snap a photo, sign off, move on — your work is documented and credited to you</li>
+          <li>Your hours are always accurate — no end-of-week guessing on timesheets</li>
+        </ul>
+        <div class="role-quote">"I show up, check my phone, know exactly what I'm doing, grab my materials, do my safety check, and start working. Everything I do gets tracked properly. My hours are right. My work is documented. I can focus on building."</div>
+      </div>
+
+      <!-- ADMIN -->
+      <div class="role-card reveal reveal-delay-3">
+        <div class="role-header">
+          <div class="role-avatar admin">📊</div>
+          <div>
+            <div class="role-title">Administration</div>
+            <div class="role-subtitle">Payroll, accounting, and company operations — without the chaos</div>
+          </div>
+        </div>
+        <ul class="role-benefits">
+          <li>Payroll data auto-calculated from worker time tracking — no manual entry</li>
+          <li>Every receipt photographed and categorized by the person who bought it</li>
+          <li>PO budgets vs actuals updated in real time — flag overruns early</li>
+          <li>Employee certifications tracked with automatic expiry alerts</li>
+          <li>Export data to QuickBooks, Sage, or any accounting system</li>
+          <li>One dashboard instead of twelve spreadsheets</li>
+        </ul>
+        <div class="role-quote">"I used to spend half my week chasing timesheets and receipts. Now the data comes to me, already organized. I review it, approve it, and export it. What used to take days takes hours."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PRODUCTION & QA MODULE
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="production">
+  <div class="container">
+    <div class="section-badge badge-orange reveal">🔧 Module 1</div>
+    <h2 class="reveal-blur">Production &amp; Quality Assurance</h2>
+    <p class="section-desc reveal">
+      Every trailer has a master checklist. Every task gets assigned. Every completion gets documented with photos and signatures. When a trailer is "done," it's really done — fully documented, fully verified, zero question marks.
+    </p>
+
+    <div class="module-layout">
+      <div class="module-content">
+        <h3 class="reveal">How a Trailer Moves Through the System</h3>
+
+        <div class="pipeline reveal">
+          <div class="pipeline-line"></div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-node">1</div>
+            <div class="pipeline-body">
+              <h4>PO Created → Trailer Registered</h4>
+              <p>New purchase order comes in. Trailers are added to the system with their type (sleeper, kitchen, washcar, office). The master checklist auto-generates based on trailer type — every task that needs to happen, pre-loaded.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-node">2</div>
+            <div class="pipeline-body">
+              <h4>Tasks Assigned to Workers</h4>
+              <p>Manager assigns tasks to team members. Each worker opens their phone and sees exactly what's on their plate today. Dependencies are enforced — electrical can't start until framing is signed off.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-node">3</div>
+            <div class="pipeline-body">
+              <h4>Work Done → Photo + Signature</h4>
+              <p>Worker completes a task, takes a photo of the finished work, and signs off with their finger on screen. Timestamp, location, and worker identity are all captured automatically.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-node">4</div>
+            <div class="pipeline-body">
+              <h4>Manager Reviews &amp; Approves</h4>
+              <p>Manager sees task completions in real time. Reviews the photo evidence, approves or sends back for rework with a note. No task moves to "complete" without manager sign-off.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-node">5</div>
+            <div class="pipeline-body">
+              <h4>Trailer Complete — Full Documentation Package</h4>
+              <p>When every task is ✓ and every sign-off is in, the trailer is officially complete. The system generates a full documentation package: every task, every photo, every signature, every timestamp. If a client calls in 6 months, you pull up the record.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-box reveal">
+          <span class="impact-icon">📸</span>
+          <div class="impact-text">
+            <strong>Full Photo Evidence Trail</strong>
+            <span>Every piece of work is documented with timestamped photos and worker signatures. No more "he said, she said." The work speaks for itself.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone mockup — Worker task view -->
+      <div class="reveal reveal-delay-2">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status-bar">
+              <span>9:41 AM</span>
+              <span>📶 🔋 87%</span>
+            </div>
+            <div class="phone-header" style="color:var(--gold)">My Tasks Today</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px; font-family:var(--mono)">
+              PO-2026-0847 · Trailer 312
+            </div>
+
+            <div class="app-task complete">
+              <div class="app-task-title">✓ Frame welding — Section A</div>
+              <div class="app-task-meta">
+                <span>Signed off 8:12 AM</span>
+                <span style="color:var(--green)">Approved</span>
+              </div>
+            </div>
+
+            <div class="app-task active">
+              <div class="app-task-title">→ Axle installation</div>
+              <div class="app-task-meta">
+                <span>In progress — 1h 23m</span>
+                <span style="color:var(--gold)">Active</span>
+              </div>
+            </div>
+
+            <div class="app-task">
+              <div class="app-task-title">Undercoating application</div>
+              <div class="app-task-meta">
+                <span>Requires: axle complete</span>
+                <span>Blocked</span>
+              </div>
+            </div>
+
+            <div class="app-task">
+              <div class="app-task-title">Sub-floor insulation</div>
+              <div class="app-task-meta">
+                <span>Est. 2 hours</span>
+                <span>Queued</span>
+              </div>
+            </div>
+
+            <div class="app-btn app-btn-gold" style="margin-top:20px">
+              📷 Complete Task + Photo
+            </div>
+
+            <div style="text-align:center; margin-top:12px;">
+              <span class="offline-badge">
+                <span class="offline-dot"></span>
+                Works Offline
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TIME TRACKING & PO MANAGEMENT
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="time">
+  <div class="container">
+    <div class="section-badge badge-gold reveal">⏱ Module 2</div>
+    <h2 class="reveal-blur">PO-Based <span style="color:var(--gold)">Time Tracking</span></h2>
+    <p class="section-desc reveal">
+      Every hour worked is tracked to a specific Purchase Order and trailer. Switch between jobs with one tap. At the end of the day, your timesheet is already done — accurate to the minute, allocated to the right job.
+    </p>
+
+    <div class="module-layout reverse">
+      <!-- Phone mockup — Timer view -->
+      <div class="reveal">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status-bar">
+              <span>11:24 AM</span>
+              <span>📶 🔋 72%</span>
+            </div>
+            <div class="phone-header" style="color:var(--gold)">Time Tracker</div>
+
+            <div class="timer-display">
+              <div class="timer-po">PO-2026-0847</div>
+              <div class="timer-trailer">Trailer 312 — 60-Man Sleeper</div>
+              <div class="timer-time" id="timerDisplay">02:47:13</div>
+              <div class="timer-label">Electrical — Panel Wiring</div>
+            </div>
+
+            <div class="app-btn app-btn-orange" style="font-size:13px; padding:10px;">
+              ⏹ Stop & Switch Trailer
+            </div>
+
+            <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border2);">
+              <div style="font-size:12px; font-weight:600; color:var(--text-dim); margin-bottom:10px;">Today's Log</div>
+
+              <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:12px; border-bottom:1px solid var(--border2);">
+                <span style="color:var(--text-dim)">Trailer 314 — Plumbing</span>
+                <span style="color:var(--gold); font-family:var(--mono); font-weight:600;">3h 12m</span>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:12px; border-bottom:1px solid var(--border2);">
+                <span style="color:var(--text-dim)">Trailer 312 — Electrical</span>
+                <span style="color:var(--gold); font-family:var(--mono); font-weight:600;">2h 47m</span>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:12px;">
+                <span style="color:var(--text-dim)">Trailer 320 — Framing</span>
+                <span style="color:var(--gold); font-family:var(--mono); font-weight:600;">1h 30m</span>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; padding:10px 0 0; font-size:13px; font-weight:700; border-top:1px solid var(--border);">
+                <span>Total Today</span>
+                <span style="color:var(--gold); font-family:var(--mono);">7h 29m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-content">
+        <h3 class="reveal">One Tap. Right Job. Right Hours.</h3>
+        <p class="reveal">Workers jump between trailers all day. The old way: guess at the end of the week. The new way: tap to start, tap to switch. Every minute is allocated to the right PO automatically.</p>
+
+        <ul class="feature-list reveal">
+          <li>
+            <div class="feature-icon">🎯</div>
+            <div class="feature-text">
+              <strong>One-Tap Job Switching</strong>
+              <span>Working on Trailer 312? Tap it. Boss asks you to jump to 314 for an hour? Tap switch. The system handles the accounting.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">
+              <strong>Real-Time PO Cost Tracking</strong>
+              <span>Management sees labor costs updating live against each Purchase Order. "PO-0847 is at 78% of budgeted labor and only 55% complete" — catch overruns before they happen.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">💵</div>
+            <div class="feature-text">
+              <strong>Accurate Payroll, Automatically</strong>
+              <span>Admin pulls up payroll data that's already calculated. No chasing timesheets. No disputes about hours. Every minute is recorded with a timestamp.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">📈</div>
+            <div class="feature-text">
+              <strong>Per-Trailer Profitability</strong>
+              <span>Combine labor hours + materials signed out = true cost per trailer, per PO. Know your actual margins, not estimated ones.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="impact-box reveal">
+          <span class="impact-icon">💡</span>
+          <div class="impact-text">
+            <strong>One Entry, Five Outcomes</strong>
+            <span>When a worker logs time, it simultaneously updates: the trailer timeline, PO labor costs, payroll data, profitability analysis, and the worker's personal timesheet.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     OWNER DASHBOARD VIEW
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="dashboard-preview" style="padding-top:60px;">
+  <div class="container">
+    <div class="section-badge badge-gold reveal">👑 Owner View</div>
+    <h2 class="reveal-blur">The Entire Company, <span style="color:var(--gold)">One Screen</span></h2>
+    <p class="section-desc reveal">This is what the owner and leadership team see when they log in. Everything that matters, live and updating.</p>
+
+    <div class="dashboard-mockup reveal reveal-delay-1">
+      <div class="dash-toolbar">
+        <div class="dash-dot r"></div>
+        <div class="dash-dot y"></div>
+        <div class="dash-dot g"></div>
+        <div class="dash-url">parkland.app/dashboard</div>
+      </div>
+      <div class="dash-body">
+        <!-- KPI Row -->
+        <div class="dash-grid">
+          <div class="dash-stat">
+            <div class="dash-stat-value gold">12</div>
+            <div class="dash-stat-label">Active Trailers</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-value green">97.2%</div>
+            <div class="dash-stat-label">Safety Compliance</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-value steel">$2.4M</div>
+            <div class="dash-stat-label">Active PO Value</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-value orange">22.4%</div>
+            <div class="dash-stat-label">Avg. Margin</div>
+          </div>
+        </div>
+
+        <!-- Trailer Cards -->
+        <div style="font-size:13px; font-weight:600; margin-bottom:12px; color:var(--text-dim);">Active Trailers — Click Any to Drill Down</div>
+        <div class="dash-trailers">
+          <div class="dash-trailer">
+            <div class="dash-trailer-header">
+              <span class="dash-trailer-id">TRL-312</span>
+              <span class="dash-trailer-status status-progress">In Progress</span>
+            </div>
+            <div class="dash-trailer-type">60-Man Sleeper · PO-0847 · Suncor</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-label"><span>Completion</span><span>67%</span></div>
+              <div class="progress-bar"><div class="progress-fill gold" data-width="67"></div></div>
+            </div>
+            <div class="progress-bar-wrap" style="margin-bottom:0;">
+              <div class="progress-label"><span>Budget Used</span><span>58%</span></div>
+              <div class="progress-bar"><div class="progress-fill green" data-width="58"></div></div>
+            </div>
+          </div>
+
+          <div class="dash-trailer">
+            <div class="dash-trailer-header">
+              <span class="dash-trailer-id">TRL-313</span>
+              <span class="dash-trailer-status status-review">QA Review</span>
+            </div>
+            <div class="dash-trailer-type">Kitchen/Dining · PO-0847 · Suncor</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-label"><span>Completion</span><span>94%</span></div>
+              <div class="progress-bar"><div class="progress-fill gold" data-width="94"></div></div>
+            </div>
+            <div class="progress-bar-wrap" style="margin-bottom:0;">
+              <div class="progress-label"><span>Budget Used</span><span>87%</span></div>
+              <div class="progress-bar"><div class="progress-fill green" data-width="87"></div></div>
+            </div>
+          </div>
+
+          <div class="dash-trailer">
+            <div class="dash-trailer-header">
+              <span class="dash-trailer-id">TRL-320</span>
+              <span class="dash-trailer-status status-complete">Complete</span>
+            </div>
+            <div class="dash-trailer-type">Office Unit · PO-0851 · CNRL</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-label"><span>Completion</span><span>100%</span></div>
+              <div class="progress-bar"><div class="progress-fill gold" data-width="100"></div></div>
+            </div>
+            <div class="progress-bar-wrap" style="margin-bottom:0;">
+              <div class="progress-label"><span>Budget Used</span><span>91%</span></div>
+              <div class="progress-bar"><div class="progress-fill green" data-width="91"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INVENTORY MODULE
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="inventory">
+  <div class="container">
+    <div class="section-badge badge-gold reveal">📦 Module 3</div>
+    <h2 class="reveal-blur">Inventory <span style="color:var(--gold)">Intelligence</span></h2>
+    <p class="section-desc reveal">
+      Every bolt, board, and bundle is tracked. Sign materials out with a tap, and the system knows what's in stock, what's running low, and what to order — before you run out.
+    </p>
+
+    <div class="module-layout">
+      <div class="module-content">
+        <h3 class="reveal">From Warehouse Chaos to Warehouse Control</h3>
+
+        <ul class="feature-list reveal">
+          <li>
+            <div class="feature-icon">📱</div>
+            <div class="feature-text">
+              <strong>Scan & Sign Out</strong>
+              <span>Worker scans a barcode or searches by name. Selects quantity, picks which trailer it's for, signs on screen. Stock updates instantly.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">⚠️</div>
+            <div class="feature-text">
+              <strong>Auto-Reorder Alerts</strong>
+              <span>Stock hits minimum threshold? Manager gets an alert with a pre-built purchase order draft — right supplier, right quantities, based on actual usage patterns.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">💰</div>
+            <div class="feature-text">
+              <strong>Cost Allocation to POs</strong>
+              <span>Every material signed out gets charged to the right PO. True cost per trailer builds automatically — no manual entry, no end-of-project surprises.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">
+              <strong>Usage Analytics</strong>
+              <span>"You're using 40% more welding rod on Camp X than similar jobs." AI spots waste, theft, or scope creep before it eats your margins.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">🏷</div>
+            <div class="feature-text">
+              <strong>Barcode / QR System</strong>
+              <span>Print labels for warehouse bins. Workers scan to check out. No searching, no guessing, no writing things on scraps of paper that get lost.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="impact-box reveal">
+          <span class="impact-icon">🧠</span>
+          <div class="impact-text">
+            <strong>AI Gets Smarter Over Time</strong>
+            <span>After 3 months, the system knows: "A 60-man sleeper uses approximately $14,200 in materials. You've consumed $11,800 and you're 65% done — you're tracking under budget by $400."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone mockup — Inventory view -->
+      <div class="reveal reveal-delay-2">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status-bar">
+              <span>7:48 AM</span>
+              <span>📶 🔋 94%</span>
+            </div>
+            <div class="phone-header" style="color:var(--gold)">Check Out Materials</div>
+
+            <div style="background:var(--surface3); border-radius:var(--radius-sm); padding:12px; margin-bottom:12px;">
+              <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">ITEM</div>
+              <div style="font-size:14px; font-weight:600;">3/4" Plywood Sheets</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">In stock: 47 sheets · Bin: A-12</div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+              <div style="background:var(--surface3); border-radius:var(--radius-sm); padding:12px;">
+                <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">QTY</div>
+                <div style="font-size:20px; font-weight:700; text-align:center;">8</div>
+              </div>
+              <div style="background:var(--surface3); border-radius:var(--radius-sm); padding:12px;">
+                <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">FOR</div>
+                <div style="font-size:13px; font-weight:600; color:var(--gold);">TRL-312</div>
+              </div>
+            </div>
+
+            <div style="background:var(--surface3); border-radius:var(--radius-sm); padding:14px; margin-bottom:12px; text-align:center;">
+              <div style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">SIGN BELOW</div>
+              <div style="height:60px; border:1px dashed var(--text-muted); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                <span style="font-family:'Brush Script MT',cursive; font-size:24px; color:var(--gold); opacity:0.7;">Mike Johnson</span>
+              </div>
+            </div>
+
+            <div class="app-btn app-btn-gold">✓ Confirm Check Out</div>
+
+            <div style="text-align:center; margin-top:12px; font-size:11px; color:var(--text-muted);">
+              Stock after: 39 sheets ·
+              <span style="color:var(--orange);">⚠ Below reorder threshold (40)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MORNING RUN SHEET
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="morning">
+  <div class="container">
+    <div class="section-badge badge-orange reveal">🚛 Smart Feature</div>
+    <h2 class="reveal-blur">The Morning Run Sheet — <span style="color:var(--orange)">One Trip, Not Ten</span></h2>
+    <p class="section-desc reveal">
+      Every night, the AI scans tomorrow's tasks, checks what's in stock, and generates a consolidated pickup list. One person, one trip, everything the whole team needs. No more forgotten parts. No more wasted hours at the store.
+    </p>
+
+    <div class="module-layout" style="grid-template-columns:1fr 500px; align-items:center;">
+      <div class="module-content">
+        <h3 class="reveal">How It Works</h3>
+
+        <ul class="feature-list reveal">
+          <li>
+            <div class="feature-icon">🌙</div>
+            <div class="feature-text">
+              <strong>AI Scans Overnight</strong>
+              <span>At 4 AM, the system checks tomorrow's tasks across all trailers, cross-references with current stock levels, and identifies everything that's needed but not available.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">🗺</div>
+            <div class="feature-text">
+              <strong>Grouped By Store, Optimized By Route</strong>
+              <span>Items are grouped by supplier. The system knows Fastenal opens at 7, Home Depot at 8. Hit them in the right order.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">📲</div>
+            <div class="feature-text">
+              <strong>Sent to the Runner's Phone</strong>
+              <span>The designated runner gets a push notification. Opens the app, sees the list, gets the job done in one efficient trip.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-icon">📷</div>
+            <div class="feature-text">
+              <strong>Receipt Capture on Return</strong>
+              <span>Runner photographs receipts, checks off items as received. Materials auto-sign into inventory and allocate to the right POs. Admin sees it immediately.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="impact-box reveal">
+          <span class="impact-icon">⏰</span>
+          <div class="impact-text">
+            <strong>Save 2-3 Hours of Downtime Per Day</strong>
+            <span>No more workers stopping mid-task to drive to the store. No more 3 people making separate trips to the same place. One run, before work starts, everything ready.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Run sheet mockup -->
+      <div class="reveal reveal-delay-1">
+        <div class="run-sheet">
+          <div class="run-sheet-header">
+            <div>
+              <div class="run-sheet-title">🚛 Morning Run Sheet</div>
+              <div style="font-size:11px; color:var(--text-muted);">Generated 4:00 AM · Assigned to Tyler</div>
+            </div>
+            <div class="run-sheet-date">Apr 17</div>
+          </div>
+
+          <div class="run-stop">
+            <div class="run-stop-name">📍 Stop 1 — Fastenal (Opens 7:00 AM)</div>
+            <div class="run-item"><span class="run-check"></span> 1/2" lag bolts (50 pcs) <span class="run-trailer-tag">TRL-320</span></div>
+            <div class="run-item"><span class="run-check"></span> Steel L-brackets (24 pcs) <span class="run-trailer-tag">TRL-312</span></div>
+            <div class="run-item"><span class="run-check"></span> SS carriage bolts 3/8" (100) <span class="run-trailer-tag">TRL-314</span></div>
+          </div>
+
+          <div class="run-stop">
+            <div class="run-stop-name">📍 Stop 2 — Home Depot (Opens 7:00 AM)</div>
+            <div class="run-item"><span class="run-check"></span> 2" deck screws (3 boxes) <span class="run-trailer-tag">TRL-312</span></div>
+            <div class="run-item"><span class="run-check"></span> 3/4" plywood (8 sheets) <span class="run-trailer-tag">TRL-314</span></div>
+            <div class="run-item"><span class="run-check"></span> Romex 14/2 (500ft roll) <span class="run-trailer-tag">TRL-312</span></div>
+            <div class="run-item"><span class="run-check"></span> Romex 14/2 (500ft roll) <span class="run-trailer-tag">TRL-313</span></div>
+            <div class="run-item"><span class="run-check"></span> PVC cement (2 cans) <span class="run-trailer-tag">TRL-314</span></div>
+          </div>
+
+          <div class="run-stop">
+            <div class="run-stop-name">📍 Stop 3 — Parkland Plumbing Supply</div>
+            <div class="run-item"><span class="run-check"></span> 1/2" PEX fittings kit <span class="run-trailer-tag">TRL-314</span></div>
+            <div class="run-item"><span class="run-check"></span> Water heater connectors (2) <span class="run-trailer-tag">TRL-313</span></div>
+          </div>
+
+          <div class="run-total">
+            <span>Est. Cost: $1,247.00</span>
+            <span style="color:var(--gold);">Est. Time: 55 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SAFETY & COMPLIANCE
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="safety">
+  <div class="container">
+    <div class="section-badge badge-green reveal">🛡 Module 4</div>
+    <h2 class="reveal-blur">Safety &amp; Compliance — <span style="color:var(--green)">The Biggest Deal</span></h2>
+    <p class="section-desc reveal">
+      This is where the platform earns its place. Better safety = bigger contracts, lower insurance, zero incidents. The AI knows every regulation, every SOP, every PPE requirement. Workers are protected. The company is protected. Everyone goes home safe.
+    </p>
+
+    <div class="safety-hero reveal">
+      <span class="big-icon">🛡</span>
+      <h3>Nobody Gets Hurt. Nobody Gets Forgotten.</h3>
+      <p>Every worker, every shift, every task — the system makes sure the right safety procedures are followed before any work begins. Not because we don't trust people, but because people deserve a system that has their back.</p>
+    </div>
+
+    <h3 style="font-family:var(--display); font-size:20px; font-weight:700; margin-bottom:24px; text-align:center;" class="reveal">The Daily Safety Flow</h3>
+
+    <div class="safety-flow reveal">
+      <div class="safety-step">
+        <div class="safety-step-num">1</div>
+        <span class="safety-step-icon">☀️</span>
+        <h4>Start of Shift</h4>
+        <p>Worker opens app, confirms they are fit for duty — not fatigued, not impaired, ready to work. Digital signature locks it in.</p>
+      </div>
+
+      <div class="safety-step">
+        <div class="safety-step-num">2</div>
+        <span class="safety-step-icon">📋</span>
+        <h4>Task Safety Brief</h4>
+        <p>AI shows: "For welding on Trailer 312, you need: welding helmet, leather gloves, fire-resistant jacket, safety glasses." Worker checks off each item.</p>
+      </div>
+
+      <div class="safety-step">
+        <div class="safety-step-num">3</div>
+        <span class="safety-step-icon">🤖</span>
+        <h4>Ask the AI</h4>
+        <p>"Is it safe to grind near the propane hookup?" AI checks specs, provides guidance, flags for supervisor if needed. Instant expert advice.</p>
+      </div>
+
+      <div class="safety-step">
+        <div class="safety-step-num">4</div>
+        <span class="safety-step-icon">✅</span>
+        <h4>Acknowledge & Work</h4>
+        <p>Worker confirms they have the right PPE and understand the hazards. Sign off. Start work. Every acknowledgment is stored with timestamp.</p>
+      </div>
+    </div>
+
+    <div class="module-layout" style="margin-top:40px;">
+      <div class="module-content">
+        <h3 class="reveal">Pre-Trip Inspections</h3>
+        <p class="reveal">Every vehicle and piece of equipment gets a digital walk-around before it's used. Checklists auto-generated per vehicle type. Flag an issue and it becomes a maintenance ticket instantly.</p>
+
+        <h3 class="reveal" style="margin-top:32px;">Incident Reporting</h3>
+        <p class="reveal">Near-miss or incident? Guided form walks through what happened, where, who was involved, photos of the scene. Auto-escalates based on severity. Tracks corrective actions until they're closed.</p>
+
+        <h3 class="reveal" style="margin-top:32px;">Certification Tracking</h3>
+        <p class="reveal">The system knows every worker's certifications and when they expire. "Mike's confined space cert expires in 14 days" — the alert goes to the manager AND admin before it lapses.</p>
+
+        <div class="impact-box reveal" style="margin-top:32px;">
+          <span class="impact-icon">🏆</span>
+          <div class="impact-text">
+            <strong>Win Bigger Contracts</strong>
+            <span>When a potential client asks "Show me your safety program," you pull up a real-time dashboard: 97% compliance rate, zero incidents this quarter, full documentation trail. COR-ready. Insurance underwriters love this.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone mockup — Safety view -->
+      <div class="reveal reveal-delay-2">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status-bar">
+              <span>6:58 AM</span>
+              <span>📶 🔋 100%</span>
+            </div>
+            <div class="phone-header" style="color:var(--green)">🛡 Safety Check-In</div>
+
+            <div class="app-task safety" style="border-left-color:var(--green);">
+              <div class="app-task-title">✓ Fitness for Duty</div>
+              <div class="app-task-meta">
+                <span>Confirmed 6:52 AM</span>
+                <span style="color:var(--green)">Done</span>
+              </div>
+            </div>
+
+            <div class="app-task safety">
+              <div class="app-task-title">→ PPE Check — Welding</div>
+              <div class="app-task-meta" style="display:block;">
+                <div style="margin-top:8px;">
+                  <div style="display:flex; align-items:center; gap:6px; padding:3px 0; font-size:12px;">
+                    <span style="color:var(--green)">☑</span> Welding helmet (auto-darkening)
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; padding:3px 0; font-size:12px;">
+                    <span style="color:var(--green)">☑</span> Leather welding gloves
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; padding:3px 0; font-size:12px;">
+                    <span style="color:var(--text-muted)">☐</span> FR jacket
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; padding:3px 0; font-size:12px;">
+                    <span style="color:var(--text-muted)">☐</span> Safety glasses
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; padding:3px 0; font-size:12px;">
+                    <span style="color:var(--text-muted)">☐</span> Steel toe boots
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.12); border-radius:var(--radius-sm); padding:12px; margin-top:12px;">
+              <div style="font-size:11px; color:var(--green); font-weight:700; margin-bottom:4px;">🤖 AI SAFETY TIP</div>
+              <div style="font-size:12px; color:var(--text-dim); line-height:1.5;">Welding near Trailer 312 propane hookup area — maintain 20ft clearance per SOP-042. Fire extinguisher required within 10ft of work area.</div>
+            </div>
+
+            <div class="app-btn app-btn-green" style="margin-top:14px">
+              ✓ All PPE Confirmed — Start Work
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ADMIN HUB
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="admin">
+  <div class="container">
+    <div class="section-badge badge-steel reveal">📊 Module 5</div>
+    <h2 class="reveal-blur">Administration Hub — <span style="color:var(--steel)">Data Comes to You</span></h2>
+    <p class="section-desc reveal">
+      The admin doesn't enter data into this system — she reads it. All the data flows in automatically from workers tracking time, signing out materials, photographing receipts, and completing safety forms. What used to take days now takes hours.
+    </p>
+
+    <div class="dashboard-mockup reveal">
+      <div class="dash-toolbar">
+        <div class="dash-dot r"></div>
+        <div class="dash-dot y"></div>
+        <div class="dash-dot g"></div>
+        <div class="dash-url">parkland.app/admin</div>
+      </div>
+      <div class="dash-body">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+          <!-- Payroll Panel -->
+          <div style="background:var(--surface2); border-radius:var(--radius-sm); padding:20px;">
+            <div style="font-family:var(--display); font-size:14px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--gold);">💰</span> Payroll — Week of Apr 14
+            </div>
+
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--text-dim)">Mike Johnson</span>
+              <span style="font-family:var(--mono); color:var(--text);">44.5 hrs</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--text-dim)">Joe Martinez</span>
+              <span style="font-family:var(--mono); color:var(--text);">42.0 hrs</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--text-dim)">Dave Wilson</span>
+              <span style="font-family:var(--mono); color:var(--orange);">48.5 hrs <span style="font-size:10px">OT</span></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:13px;">
+              <span style="color:var(--text-dim)">Tyler Brooks</span>
+              <span style="font-family:var(--mono); color:var(--text);">40.0 hrs</span>
+            </div>
+
+            <div style="margin-top:12px; padding-top:10px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:12px;">
+              <span style="color:var(--green);">✓ Auto-calculated from time tracking</span>
+              <span style="color:var(--steel); cursor:pointer;">Export →</span>
+            </div>
+          </div>
+
+          <!-- PO Financial Panel -->
+          <div style="background:var(--surface2); border-radius:var(--radius-sm); padding:20px;">
+            <div style="font-family:var(--display); font-size:14px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--steel);">📋</span> PO Profitability
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                <span style="color:var(--gold); font-family:var(--mono); font-weight:600;">PO-0847 Suncor</span>
+                <span style="color:var(--green);">+$18,400 margin</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill green" data-width="72" style="width:72%"></div></div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:3px;">Budget: $340K · Spent: $245K · 72% consumed at 67% complete ✓</div>
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                <span style="color:var(--gold); font-family:var(--mono); font-weight:600;">PO-0851 CNRL</span>
+                <span style="color:var(--orange);">⚠ $2,100 over</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill gold" data-width="94" style="width:94%"></div></div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:3px;">Budget: $120K · Spent: $122K · Electrical ran over — flagged</div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                <span style="color:var(--gold); font-family:var(--mono); font-weight:600;">PO-0855 Imperial</span>
+                <span style="color:var(--green);">On track</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill green" data-width="35" style="width:35%"></div></div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:3px;">Budget: $580K · Spent: $195K · 34% consumed at 38% complete ✓</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom row -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px;">
+          <!-- Cert Alerts -->
+          <div style="background:var(--surface2); border-radius:var(--radius-sm); padding:20px;">
+            <div style="font-family:var(--display); font-size:14px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--orange);">🎓</span> Certification Alerts
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--red);">⚠</span>
+              <span style="color:var(--text-dim); flex:1;">Mike — Confined Space</span>
+              <span style="color:var(--red); font-size:12px; font-weight:600;">Expires in 8 days</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--orange);">⚠</span>
+              <span style="color:var(--text-dim); flex:1;">Tyler — First Aid</span>
+              <span style="color:var(--orange); font-size:12px; font-weight:600;">Expires in 22 days</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 0; font-size:13px;">
+              <span style="color:var(--green);">✓</span>
+              <span style="color:var(--text-dim); flex:1;">All other certs current</span>
+              <span style="color:var(--green); font-size:12px;">18 workers verified</span>
+            </div>
+          </div>
+
+          <!-- Expense Tracking -->
+          <div style="background:var(--surface2); border-radius:var(--radius-sm); padding:20px;">
+            <div style="font-family:var(--display); font-size:14px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--green);">🧾</span> Recent Expenses
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--text-dim)">Home Depot — materials run</span>
+              <span style="font-family:var(--mono);">$847.32</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border2); font-size:13px;">
+              <span style="color:var(--text-dim)">Fastenal — fasteners</span>
+              <span style="font-family:var(--mono);">$412.00</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:13px;">
+              <span style="color:var(--text-dim)">Parkland Plumbing — fittings</span>
+              <span style="font-family:var(--mono);">$328.50</span>
+            </div>
+            <div style="margin-top:10px; font-size:11px; color:var(--green);">✓ All receipts photographed · auto-allocated to POs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MARKETING PIPELINE
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="marketing">
+  <div class="container">
+    <div class="section-badge badge-purple reveal">📸 Bonus Module</div>
+    <h2 class="reveal-blur">Production Photos → <span style="color:var(--purple)">Marketing Gold</span></h2>
+    <p class="section-desc reveal">
+      Your workers are already taking photos for QA sign-offs. Those same photos — real work, real craftsmanship, real projects — become powerful marketing content. No photo shoots needed. No stock images. Real work, automatically turned into social posts, project showcases, and client testimonials.
+    </p>
+
+    <div class="marketing-flow reveal">
+      <div class="mkt-node">
+        <span class="mkt-node-icon">📷</span>
+        <span class="mkt-node-label">Worker takes QA photo</span>
+      </div>
+      <span class="mkt-arrow">→</span>
+      <div class="mkt-node">
+        <span class="mkt-node-icon">🏷</span>
+        <span class="mkt-node-label">Auto-tagged by type</span>
+      </div>
+      <span class="mkt-arrow">→</span>
+      <div class="mkt-node">
+        <span class="mkt-node-icon">🤖</span>
+        <span class="mkt-node-label">AI generates caption</span>
+      </div>
+      <span class="mkt-arrow">→</span>
+      <div class="mkt-node">
+        <span class="mkt-node-icon">✅</span>
+        <span class="mkt-node-label">Manager approves</span>
+      </div>
+      <span class="mkt-arrow">→</span>
+      <div class="mkt-node">
+        <span class="mkt-node-icon">📱</span>
+        <span class="mkt-node-label">Published to social</span>
+      </div>
+    </div>
+
+    <div class="promise-grid" style="max-width:900px; margin:0 auto;">
+      <div class="promise-card card-gold reveal">
+        <span class="promise-icon">🔄</span>
+        <h3>Before &amp; After Showcases</h3>
+        <p>The system automatically pairs early-build and completion photos of the same trailer. "From bare frame to fully finished in 3 weeks." Real transformation stories.</p>
+      </div>
+      <div class="promise-card card-steel reveal reveal-delay-1">
+        <span class="promise-icon">⏱</span>
+        <h3>Time-Lapse Compilations</h3>
+        <p>12 photos over 2 weeks → auto-compiled into a visual build story. Prospects see the craftsmanship that goes into every unit.</p>
+      </div>
+      <div class="promise-card card-orange reveal reveal-delay-2">
+        <span class="promise-icon">👷</span>
+        <h3>Team Spotlights</h3>
+        <p>"Clean wiring, every time. Meet Joe — 200+ panels installed this year." Workers get recognized. Parkland gets humanized. Everyone wins.</p>
+      </div>
+    </div>
+
+    <div class="impact-box reveal" style="max-width:700px; margin:32px auto 0;">
+      <span class="impact-icon">🎯</span>
+      <div class="impact-text">
+        <strong>Marketing That Runs Itself</strong>
+        <span>You never have to schedule a photo shoot or write a social post from scratch. The content comes from the actual work your team does every day. Authentic, consistent, and automatic.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INCENTIVE PROGRAMS
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="incentives">
+  <div class="container">
+    <div class="section-badge badge-green reveal">🏆 Built-In Programs</div>
+    <h2 class="reveal-blur">Reward the Best. <span style="color:var(--green)">Elevate Everyone.</span></h2>
+    <p class="section-desc reveal">
+      The system tracks everything — safety compliance, task completion, quality, efficiency. That data powers incentive programs that reward great work and motivate the whole team. When the company does well, the team does well.
+    </p>
+
+    <div class="incentive-grid">
+      <div class="incentive-card reveal">
+        <span class="incentive-icon">🛡</span>
+        <h4>Safety Champion</h4>
+        <p>100% safety compliance for the month? Zero incidents? Pre-trip inspections always on time? The system knows. Monthly bonus for the safest workers. When safety is rewarded, safety becomes culture.</p>
+      </div>
+      <div class="incentive-card reveal reveal-delay-1">
+        <span class="incentive-icon">⚡</span>
+        <h4>Efficiency Leader</h4>
+        <p>Consistently completing quality work under budgeted hours? The AI tracks productivity patterns — not to punish, but to recognize. Top performers get recognized and rewarded.</p>
+      </div>
+      <div class="incentive-card reveal reveal-delay-2">
+        <span class="incentive-icon">⭐</span>
+        <h4>Quality Score</h4>
+        <p>Tasks approved on first submission, no rework needed, clean documentation every time. The system builds a quality score for each worker. High scores = team awards, bonuses, or first pick on preferred jobs.</p>
+      </div>
+      <div class="incentive-card reveal reveal-delay-3">
+        <span class="incentive-icon">🤝</span>
+        <h4>Team Milestones</h4>
+        <p>Whole company hit 30 days with zero incidents? A PO came in under budget? A trailer shipped ahead of schedule? Team celebrations, shared bonuses, collective pride. Success is a team sport.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:40px;" class="reveal">
+      <div style="display:inline-flex; flex-direction:column; align-items:center; padding:28px 40px; background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius);">
+        <div style="font-size:48px; margin-bottom:10px;">📊</div>
+        <div style="font-family:var(--display); font-size:18px; font-weight:700; margin-bottom:6px;">Leaderboard — Optional, Transparent</div>
+        <div style="font-size:14px; color:var(--text-dim); max-width:500px; line-height:1.6;">
+          Workers can see how they're doing. Not to create pressure — but to create friendly competition and personal growth. "I was at 94% safety last month, I want to hit 100% this month." Everyone lifts each other up.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BUILD ROADMAP
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-badge badge-cyan reveal">🗺 Build Roadmap</div>
+    <h2 class="reveal-blur">How We Build This — <span style="color:var(--cyan)">Phase by Phase</span></h2>
+    <p class="section-desc reveal">
+      We don't build everything at once. We start with the spine (POs + users), add the highest-value module first (production tracking), and layer on from there. Each phase delivers real value on its own.
+    </p>
+
+    <div class="phase-timeline reveal">
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 1 — Foundation</div>
+        <h4>The Spine: Users, Roles &amp; PO Registry</h4>
+        <p>Authentication system with role-based access (owner, manager, worker, admin). Purchase Order registry — the backbone everything connects to. Trailer database linked to POs. Mobile-responsive shell with offline capability.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-admin">Core</span>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 2 — Production &amp; Time</div>
+        <h4>Checklist System + PO Time Tracking</h4>
+        <p>Master checklist templates per trailer type. Task assignment + worker mobile flow. Photo capture + digital signature. PO-based time tracking with one-tap switching. Manager approval workflow. This is where the ROI starts showing up immediately.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-prod">Production</span>
+          <span class="phase-tag tag-admin">Time</span>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 3 — Inventory</div>
+        <h4>Parts Tracking + Smart Procurement</h4>
+        <p>Parts database with barcode/QR system. Sign-out/sign-in flow linked to POs. Stock level alerts + auto-reorder suggestions. Morning run sheet generator. Receipt capture with photo + auto-categorization.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-inv">Inventory</span>
+          <span class="phase-tag tag-ai">AI</span>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 4 — Safety</div>
+        <h4>Compliance Engine + AI Safety Advisor</h4>
+        <p>Fitness-for-duty declarations. Task-based PPE checklists generated by AI. Pre-trip vehicle inspections. Incident reporting with escalation. AI safety knowledge base loaded with Alberta OHS regs + company SOPs. Certification tracking with expiry alerts.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-safe">Safety</span>
+          <span class="phase-tag tag-ai">AI</span>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 5 — Administration</div>
+        <h4>Payroll, Finance &amp; Reporting</h4>
+        <p>Payroll aggregation from time tracking data. PO profitability dashboards (budget vs actual, live). Expense tracking with receipt photos. Employee HR records + cert management. Export to QuickBooks/Sage. Custom report builder.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 6 — Marketing</div>
+        <h4>Production → Content Pipeline</h4>
+        <p>Photo tagging for marketing use. Auto-generated social content from build progress. Before/after showcases. Team spotlight posts. Project portfolio generation. Social publishing or integration with marketing systems.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-mkt">Marketing</span>
+          <span class="phase-tag tag-ai">AI</span>
+        </div>
+      </div>
+
+      <div class="phase-item">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 7 — Intelligence Layer</div>
+        <h4>AI Gets Smarter Every Month</h4>
+        <p>Predictive inventory reordering based on usage patterns. Production bottleneck detection and crew balancing. Profitability forecasting per PO and per trailer type. Safety trend analysis and predictive risk assessment. The longer the system runs, the smarter it gets.</p>
+        <div class="phase-modules">
+          <span class="phase-tag tag-ai">AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLOSING CTA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <h2 class="reveal">From $10M to $15M.<br>Smarter. Safer. Together.</h2>
+    <p class="reveal reveal-delay-1">
+      This isn't about replacing people. It's about giving every person at Parkland Modular a system that makes their work easier, their hours accurate, their safety guaranteed, and their contributions visible. When the system saves money and wins bigger contracts, everyone benefits.
+    </p>
+
+    <div class="reveal reveal-delay-2">
+      <div class="cta-badge">
+        <span style="font-size:24px;">🏗</span>
+        One Platform · Every Worker · Every Trailer · Every Dollar
+      </div>
+    </div>
+
+    <div class="powered-by reveal reveal-delay-3">
+      Built by AI Precision Marketing · aiprecisionmarketing.ca
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+// Scroll reveal
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Progress bar animation
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bars = entry.target.querySelectorAll('.progress-fill[data-width]');
+      bars.forEach(bar => {
+        setTimeout(() => {
+          bar.style.width = bar.dataset.width + '%';
+        }, 300);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.dashboard-mockup, .dash-trailer').forEach(el => barObserver.observe(el));
+
+// Live timer
+let seconds = 10033; // 2:47:13
+function updateTimer() {
+  seconds++;
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  const el = document.getElementById('timerDisplay');
+  if (el) {
+    el.textContent =
+      String(h).padStart(2, '0') + ':' +
+      String(m).padStart(2, '0') + ':' +
+      String(s).padStart(2, '0');
+  }
+}
+setInterval(updateTimer, 1000);
+
+// Nav dots
+const sections = ['hero','promise','roles','production','time','inventory','morning','safety','admin','marketing','incentives','roadmap'];
+const dots = document.querySelectorAll('.nav-dot');
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const target = dot.dataset.target;
+    document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = sections.indexOf(entry.target.id);
+      if (idx !== -1) {
+        dots.forEach(d => d.classList.remove('active'));
+        dots[idx]?.classList.add('active');
+      }
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+
+// Smooth scroll for TOC
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    target?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// PARTICLE SYSTEM — Industrial Floating Specs
+// ═══════════════════════════════════════════════════════════════
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = 0, mouseY = 0;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.color = ['251,191,36', '249,115,22', '96,165,250', '52,211,153', '167,139,250'][Math.floor(Math.random() * 5)];
+    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+    this.pulseOffset = Math.random() * Math.PI * 2;
+  }
+  update(time) {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    // Subtle mouse repulsion
+    const dx = this.x - mouseX;
+    const dy = this.y - mouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 150) {
+      this.x += (dx / dist) * 0.5;
+      this.y += (dy / dist) * 0.5;
+    }
+    // Wrap around
+    if (this.x < -10) this.x = canvas.width + 10;
+    if (this.x > canvas.width + 10) this.x = -10;
+    if (this.y < -10) this.y = canvas.height + 10;
+    if (this.y > canvas.height + 10) this.y = -10;
+    // Pulse opacity
+    this.currentOpacity = this.opacity * (0.5 + 0.5 * Math.sin(time * this.pulseSpeed + this.pulseOffset));
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color}, ${this.currentOpacity})`;
+    ctx.fill();
+    // Glow
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color}, ${this.currentOpacity * 0.15})`;
+    ctx.fill();
+  }
+}
+
+// Create particles
+const particleCount = Math.min(80, Math.floor(window.innerWidth / 20));
+for (let i = 0; i < particleCount; i++) {
+  particles.push(new Particle());
+}
+
+// Draw connections between nearby particles
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        const opacity = (1 - dist / 120) * 0.08;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(251, 191, 36, ${opacity})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+let animTime = 0;
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  animTime++;
+  particles.forEach(p => {
+    p.update(animTime);
+    p.draw();
+  });
+  drawConnections();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ═══════════════════════════════════════════════════════════════
+// COUNTER ANIMATION — Animate numbers when they scroll into view
+// ═══════════════════════════════════════════════════════════════
+function animateCounter(el, target, suffix = '', prefix = '', duration = 2000) {
+  const start = performance.now();
+  const isDecimal = String(target).includes('.');
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = eased * target;
+
+    if (isDecimal) {
+      el.textContent = prefix + current.toFixed(1) + suffix;
+    } else {
+      el.textContent = prefix + Math.floor(current) + suffix;
+    }
+
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      const el = entry.target;
+      const text = el.textContent.trim();
+
+      // Parse the number and affixes
+      if (text === '12') animateCounter(el, 12, '', '', 1500);
+      else if (text === '97.2%') animateCounter(el, 97.2, '%', '', 2000);
+      else if (text === '$2.4M') animateCounter(el, 2.4, 'M', '$', 2000);
+      else if (text === '22.4%') animateCounter(el, 22.4, '%', '', 2000);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.dash-stat-value').forEach(el => counterObserver.observe(el));
+
+// ═══════════════════════════════════════════════════════════════
+// PARALLAX MESH — Hero background follows scroll
+// ═══════════════════════════════════════════════════════════════
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        const factor = scrollY * 0.02;
+        hero.style.setProperty('--mesh-x1', `${20 + factor}%`);
+        hero.style.setProperty('--mesh-y1', `${30 + factor * 0.5}%`);
+        hero.style.setProperty('--mesh-x2', `${80 - factor}%`);
+        hero.style.setProperty('--mesh-y2', `${60 - factor * 0.3}%`);
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// ENHANCED REVEAL — Add special reveal classes
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.reveal-slide-left, .reveal-slide-right, .reveal-scale, .reveal-blur').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// TYPEWRITER EFFECT for hero subtitle
+// ═══════════════════════════════════════════════════════════════
+const heroSub = document.querySelector('.hero-sub');
+if (heroSub) {
+  const originalHTML = heroSub.innerHTML;
+  // Already rendered, just add a subtle entrance
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MAGNETIC HOVER on promise cards
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.promise-card, .incentive-card, .safety-step').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    card.style.transform = `translateY(-4px) perspective(1000px) rotateY(${x * 0.02}deg) rotateX(${-y * 0.02}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// STAGGER ANIMATION for pipeline steps
+// ═══════════════════════════════════════════════════════════════
+const pipelineObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const steps = entry.target.querySelectorAll('.pipeline-step');
+      steps.forEach((step, i) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateX(-30px)';
+        setTimeout(() => {
+          step.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          step.style.opacity = '1';
+          step.style.transform = 'translateX(0)';
+        }, i * 150);
+      });
+      pipelineObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.pipeline').forEach(p => pipelineObserver.observe(p));
+
+// Same for phase timeline
+const phaseObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const items = entry.target.querySelectorAll('.phase-item');
+      items.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-40px)';
+        setTimeout(() => {
+          item.style.transition = 'all 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, i * 120);
+      });
+      phaseObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.phase-timeline').forEach(p => phaseObserver.observe(p));
+
+// Safety flow stagger
+const safetyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const steps = entry.target.querySelectorAll('.safety-step');
+      steps.forEach((step, i) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(30px) scale(0.9)';
+        setTimeout(() => {
+          step.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          step.style.opacity = '1';
+          step.style.transform = 'translateY(0) scale(1)';
+        }, i * 200);
+      });
+      safetyObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.safety-flow').forEach(p => safetyObserver.observe(p));
+
+// Marketing flow stagger
+const mktObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const nodes = entry.target.querySelectorAll('.mkt-node, .mkt-arrow');
+      nodes.forEach((node, i) => {
+        node.style.opacity = '0';
+        node.style.transform = 'translateX(-20px)';
+        setTimeout(() => {
+          node.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+          node.style.opacity = '1';
+          node.style.transform = 'translateX(0)';
+        }, i * 100);
+      });
+      mktObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.marketing-flow').forEach(p => mktObserver.observe(p));
+</script>
+
+</body>
+</html>
