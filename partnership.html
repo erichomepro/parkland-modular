@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parkland Modular × AI Precision Marketing — Technology Partnership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0f1c;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --surface3: #1e293b;
+  --border: rgba(251,191,36,0.15);
+  --border2: rgba(255,255,255,0.06);
+  --border3: rgba(255,255,255,0.1);
+  --gold: #fbbf24;
+  --gold-dim: rgba(251,191,36,0.7);
+  --gold-glow: rgba(251,191,36,0.25);
+  --orange: #f97316;
+  --steel: #60a5fa;
+  --green: #34d399;
+  --green-glow: rgba(52,211,153,0.15);
+  --red: #f87171;
+  --cyan: #22d3ee;
+  --purple: #a78bfa;
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --display: 'Unbounded', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 800px 600px at 15% 8%, rgba(251,191,36,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 800px at 85% 25%, rgba(96,165,250,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 500px at 50% 85%, rgba(52,211,153,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+canvas#particleCanvas {
+  position: fixed; top:0; left:0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Animations ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-blur.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { text-shadow: 0 0 10px rgba(251,191,36,0.3); }
+  25% { text-shadow: 0 0 20px rgba(251,191,36,0.6), 0 0 40px rgba(251,191,36,0.2); }
+  50% { text-shadow: 0 0 10px rgba(249,115,22,0.3); }
+  75% { text-shadow: 0 0 25px rgba(249,115,22,0.5), 0 0 50px rgba(249,115,22,0.15); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--gold-glow); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 8px transparent; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(251,191,36,0.15), 0 0 30px rgba(251,191,36,0.05); }
+  50% { box-shadow: 0 0 24px rgba(251,191,36,0.3), 0 0 60px rgba(251,191,36,0.1); }
+}
+
+@keyframes line-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 200%; }
+}
+
+@keyframes divider-shift {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes check-pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Section Dividers ─── */
+.section-divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--orange) 50%, var(--green) 80%, transparent);
+  background-size: 200% 100%;
+  animation: divider-shift 8s linear infinite;
+}
+
+/* ─── Badges ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.badge-gold { color: var(--gold); background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.15); }
+.badge-green { color: var(--green); background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.15); }
+.badge-steel { color: var(--steel); background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.15); }
+.badge-orange { color: var(--orange); background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.15); }
+.badge-cyan { color: var(--cyan); background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.15); }
+.badge-purple { color: var(--purple); background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.15); }
+
+section { padding: 80px 0; position: relative; }
+
+section h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+section .desc {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 680px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════ */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(251,191,36,0.05);
+  margin-bottom: 32px;
+}
+
+.hero-badge .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 19px;
+  color: var(--text-dim);
+  max-width: 660px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-sub strong { color: var(--gold); }
+
+/* Logos banner */
+.partnership-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.logo-box {
+  padding: 14px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.logo-x {
+  font-size: 20px;
+  color: var(--gold);
+  font-weight: 800;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THE PROBLEM COSTS
+   ═══════════════════════════════════════════════════════════════ */
+.cost-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.cost-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cost-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--orange));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.cost-card:hover { border-color: rgba(248,113,113,0.2); transform: translateY(-4px); }
+.cost-card:hover::before { opacity: 1; }
+
+.cost-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+
+.cost-amount {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.cost-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.cost-total {
+  background: linear-gradient(135deg, rgba(248,113,113,0.06), rgba(249,115,22,0.04));
+  border: 1px solid rgba(248,113,113,0.15);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  text-align: center;
+}
+
+.cost-total-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+
+.cost-total-amount {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--red);
+}
+
+.cost-total-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WHAT YOU GET (Value Stack)
+   ═══════════════════════════════════════════════════════════════ */
+.value-stack {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.value-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+
+.value-item:hover {
+  border-color: var(--border);
+  transform: translateX(4px);
+}
+
+.value-check {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(52,211,153,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.value-text {
+  flex: 1;
+}
+
+.value-text strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.value-text span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.value-price {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DEPLOYMENT TIMELINE
+   ═══════════════════════════════════════════════════════════════ */
+.timeline {
+  position: relative;
+  padding-left: 80px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 34px;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--gold), var(--orange), var(--green), var(--steel));
+  background-size: 100% 200%;
+  animation: line-flow 6s linear infinite;
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  transition: all 0.4s;
+}
+
+.timeline-item:hover {
+  border-color: var(--border);
+  box-shadow: 0 16px 48px -16px rgba(0,0,0,0.4);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -58px;
+  top: 32px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 3px solid;
+  background: var(--bg);
+  z-index: 2;
+}
+
+.timeline-month {
+  position: absolute;
+  left: -78px;
+  top: 56px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-align: center;
+  width: 60px;
+}
+
+.timeline-item:nth-child(1) .timeline-dot { border-color: var(--gold); }
+.timeline-item:nth-child(2) .timeline-dot { border-color: var(--orange); }
+.timeline-item:nth-child(3) .timeline-dot { border-color: var(--green); }
+.timeline-item:nth-child(4) .timeline-dot { border-color: var(--steel); }
+.timeline-item:nth-child(5) .timeline-dot { border-color: var(--cyan); }
+
+.timeline-badge {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.timeline-item:nth-child(1) .timeline-badge { background: rgba(251,191,36,0.1); color: var(--gold); }
+.timeline-item:nth-child(2) .timeline-badge { background: rgba(249,115,22,0.1); color: var(--orange); }
+.timeline-item:nth-child(3) .timeline-badge { background: rgba(52,211,153,0.1); color: var(--green); }
+.timeline-item:nth-child(4) .timeline-badge { background: rgba(96,165,250,0.1); color: var(--steel); }
+.timeline-item:nth-child(5) .timeline-badge { background: rgba(34,211,238,0.1); color: var(--cyan); }
+
+.timeline-item h4 {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.timeline-item p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.timeline-modules {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.timeline-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tag-prod { background: rgba(249,115,22,0.1); color: var(--orange); }
+.tag-inv { background: rgba(251,191,36,0.1); color: var(--gold); }
+.tag-safe { background: rgba(52,211,153,0.1); color: var(--green); }
+.tag-admin { background: rgba(96,165,250,0.1); color: var(--steel); }
+.tag-mkt { background: rgba(167,139,250,0.1); color: var(--purple); }
+.tag-ai { background: rgba(34,211,238,0.1); color: var(--cyan); }
+.tag-core { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+
+.timeline-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+  margin-top: 8px;
+}
+
+.timeline-live .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRICING CARDS
+   ═══════════════════════════════════════════════════════════════ */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+@media (max-width: 700px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+
+.pricing-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+.pricing-card:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
+}
+
+.pricing-card.featured {
+  border-color: rgba(251,191,36,0.25);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.pricing-card.featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--orange));
+}
+
+.pricing-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.pricing-card.featured .pricing-label { color: var(--gold); }
+
+.pricing-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.pricing-duration {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.pricing-amount {
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+.pricing-card.featured .pricing-amount {
+  background: linear-gradient(135deg, var(--gold), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pricing-card:not(.featured) .pricing-amount {
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pricing-per {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.pricing-features li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.pricing-features li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BONUS SECTION
+   ═══════════════════════════════════════════════════════════════ */
+.bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.bonus-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.4s;
+}
+
+.bonus-card:hover {
+  border-color: rgba(52,211,153,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px -16px rgba(0,0,0,0.4);
+}
+
+.bonus-icon { font-size: 40px; margin-bottom: 12px; display: block; }
+
+.bonus-card h4 {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.bonus-amount {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.bonus-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPARISON TABLE
+   ═══════════════════════════════════════════════════════════════ */
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  font-size: 14px;
+}
+
+.compare-table th {
+  background: rgba(0,0,0,0.3);
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.compare-table th:last-child {
+  color: var(--gold);
+}
+
+.compare-table tr:last-child td { border-bottom: none; }
+
+.compare-table td:first-child {
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.compare-table td:nth-child(2),
+.compare-table td:nth-child(3),
+.compare-table td:nth-child(4) {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.compare-table td:last-child {
+  text-align: center;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.compare-no { color: var(--red) !important; }
+.compare-yes { color: var(--green) !important; }
+.compare-partial { color: var(--orange) !important; }
+
+.compare-table tr:hover td {
+  background: rgba(251,191,36,0.02);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ROI CALCULATOR
+   ═══════════════════════════════════════════════════════════════ */
+.roi-box {
+  background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(34,211,238,0.04));
+  border: 1px solid rgba(52,211,153,0.15);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.roi-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(52,211,153,0.08);
+  font-size: 14px;
+}
+
+.roi-row:last-child { border-bottom: none; }
+
+.roi-row span:first-child { color: var(--text-dim); }
+
+.roi-row span:last-child {
+  font-family: var(--mono);
+  font-weight: 600;
+}
+
+.roi-row.total {
+  padding-top: 16px;
+  margin-top: 8px;
+  border-top: 2px solid rgba(52,211,153,0.2);
+  border-bottom: none;
+}
+
+.roi-row.total span:first-child {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.roi-row.total span:last-child {
+  font-size: 20px;
+  color: var(--green);
+}
+
+.roi-bottom {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(52,211,153,0.1);
+}
+
+.roi-multiplier {
+  font-family: var(--display);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--green);
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+.roi-multiplier-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA / FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+.cta {
+  text-align: center;
+  padding: 80px 0 100px;
+}
+
+.cta h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 900;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff, var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cta p {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.cta-summary {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 48px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.cta-price {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--gold), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cta-detail {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.cta-detail strong { color: var(--green); }
+
+.powered-by {
+  margin-top: 48px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─── Magnetic hover ─── */
+.magnetic {
+  transition: transform 0.3s;
+}
+
+/* ─── Impact callout ─── */
+.impact {
+  background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(34,211,238,0.04));
+  border: 1px solid rgba(52,211,153,0.12);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.impact-icon { font-size: 32px; flex-shrink: 0; }
+
+.impact-text strong {
+  display: block;
+  font-size: 14px;
+  color: var(--green);
+  margin-bottom: 3px;
+}
+
+.impact-text span {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Year summary */
+.year-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 600px;
+  margin: 32px auto;
+}
+
+@media (max-width: 600px) {
+  .year-summary { grid-template-columns: 1fr; }
+}
+
+.year-block {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+}
+
+.year-amount {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.year-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particleCanvas"></canvas>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge reveal">
+      <span class="dot"></span>
+      Technology Partnership Proposal
+    </div>
+
+    <h1 class="reveal reveal-delay-1">Your Technology Partner.<br>Not Just a Vendor.</h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      A proposal to design, build, and operate the <strong>Operations Intelligence Platform</strong> that takes Parkland Modular from $10M to $15M+ — through better systems, better safety, and better data.
+    </p>
+
+    <div class="partnership-logos reveal reveal-delay-3">
+      <div class="logo-box" style="color:var(--gold);">Parkland Modular</div>
+      <div class="logo-x">×</div>
+      <div class="logo-box" style="color:var(--cyan);">AI Precision Marketing</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE COST OF DOING NOTHING
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-orange reveal">💸 The Real Numbers</div>
+    <h2 class="reveal-blur">What The Current Way<br><span style="color:var(--red)">Is Actually Costing You</span></h2>
+    <p class="desc reveal">
+      These aren't dramatic estimates. They're the quiet costs that add up every single week — time wasted, materials untracked, contracts you can't bid on, and margins you can't see until it's too late.
+    </p>
+
+    <div class="cost-grid">
+      <div class="cost-card reveal">
+        <span class="cost-icon">🚛</span>
+        <div class="cost-amount" data-count="37000" data-prefix="$" data-suffix="/yr">$37,000/yr</div>
+        <div class="cost-label">Multiple daily store runs instead of one morning trip. 2-3 hours of worker downtime per day.</div>
+      </div>
+      <div class="cost-card reveal reveal-delay-1">
+        <span class="cost-icon">📋</span>
+        <div class="cost-amount" data-count="75000" data-prefix="$" data-suffix="/yr">$75,000/yr</div>
+        <div class="cost-label">PO overruns caught after the fact. Budget vs actual tracked on spreadsheets — too late to act.</div>
+      </div>
+      <div class="cost-card reveal reveal-delay-2">
+        <span class="cost-icon">📦</span>
+        <div class="cost-amount" data-count="40000" data-prefix="$" data-suffix="/yr">$40,000/yr</div>
+        <div class="cost-label">Material waste, untracked usage, and inventory guesswork. Nobody knows exactly what's in stock.</div>
+      </div>
+      <div class="cost-card reveal reveal-delay-3">
+        <span class="cost-icon">🛡</span>
+        <div class="cost-amount" data-count="2000000" data-prefix="$" data-suffix="/yr">$2,000,000/yr</div>
+        <div class="cost-label">Contracts you can't bid on because your safety program isn't documented well enough to win them.</div>
+      </div>
+    </div>
+
+    <div class="cost-grid" style="max-width:560px; margin:0 auto;">
+      <div class="cost-card reveal">
+        <span class="cost-icon">⏱</span>
+        <div class="cost-amount" data-count="25000" data-prefix="$" data-suffix="/yr">$25,000/yr</div>
+        <div class="cost-label">Admin time spent chasing timesheets, reconciling receipts, and manual data entry every single week.</div>
+      </div>
+      <div class="cost-card reveal reveal-delay-1">
+        <span class="cost-icon">📊</span>
+        <div class="cost-amount" data-count="30000" data-prefix="$" data-suffix="/yr">$30,000/yr</div>
+        <div class="cost-label">Insurance premiums you're overpaying because there's no documented, digital safety system.</div>
+      </div>
+    </div>
+
+    <div class="cost-total reveal" style="margin-top:24px;">
+      <div class="cost-total-label">Conservative Total Annual Cost of Current Operations</div>
+      <div class="cost-total-amount">$620,000 — $2,200,000+</div>
+      <div class="cost-total-sub">Every year these problems go unsolved</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHY NOT THE ALTERNATIVES
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-steel reveal">🔍 The Alternatives</div>
+    <h2 class="reveal-blur">Why Not Just Hire a Developer?<br><span style="color:var(--steel)">Or Buy Off-the-Shelf Software?</span></h2>
+    <p class="desc reveal">
+      There are other ways to solve this problem. Here's why they don't work as well for what Parkland needs.
+    </p>
+
+    <table class="compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Hire Developer</th>
+          <th>Off-the-Shelf SaaS</th>
+          <th>Dev Agency</th>
+          <th style="color:var(--gold)">AIP Partnership</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Annual cost</td>
+          <td>$120K-$180K</td>
+          <td>$24K-$60K</td>
+          <td>$200K-$400K</td>
+          <td class="compare-yes">$102K Year 1</td>
+        </tr>
+        <tr>
+          <td>Built for trailer manufacturing</td>
+          <td class="compare-partial">Maybe</td>
+          <td class="compare-no">No — generic</td>
+          <td class="compare-partial">If you specify it</td>
+          <td class="compare-yes">Yes — from day one</td>
+        </tr>
+        <tr>
+          <td>AI safety knowledge base</td>
+          <td class="compare-no">No</td>
+          <td class="compare-no">No</td>
+          <td class="compare-partial">Extra cost</td>
+          <td class="compare-yes">Included</td>
+        </tr>
+        <tr>
+          <td>Marketing pipeline from QA photos</td>
+          <td class="compare-no">No</td>
+          <td class="compare-no">No</td>
+          <td class="compare-no">No</td>
+          <td class="compare-yes">Included</td>
+        </tr>
+        <tr>
+          <td>Smart morning run sheets</td>
+          <td class="compare-partial">If they build it</td>
+          <td class="compare-no">No</td>
+          <td class="compare-partial">If scoped</td>
+          <td class="compare-yes">Included</td>
+        </tr>
+        <tr>
+          <td>Time to first module live</td>
+          <td>3-6 months</td>
+          <td>1-2 months*</td>
+          <td>6-12 months</td>
+          <td class="compare-yes">1 month</td>
+        </tr>
+        <tr>
+          <td>Ongoing optimization & AI tuning</td>
+          <td class="compare-partial">If they stay</td>
+          <td class="compare-no">Their roadmap</td>
+          <td class="compare-no">Project ends</td>
+          <td class="compare-yes">Continuous</td>
+        </tr>
+        <tr>
+          <td>Understands YOUR business</td>
+          <td class="compare-partial">Over time</td>
+          <td class="compare-no">Never</td>
+          <td class="compare-partial">During project</td>
+          <td class="compare-yes">From the start</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align:center; font-size:13px; color:var(--text-muted); margin-top:-20px;" class="reveal">
+      *Off-the-shelf gets you running fast, but you're locked into their features, their limitations, and their pricing increases.
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DEPLOYMENT TIMELINE
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-gold reveal">📅 Rollout Plan</div>
+    <h2 class="reveal-blur">Deployed in Phases.<br><span style="color:var(--gold)">Value From Month One.</span></h2>
+    <p class="desc reveal">
+      We don't dump the entire platform on your team at once. Each month, a new module goes live. Your team learns it, uses it, gives feedback, and we tune it before adding the next piece. By month four, the full system is running.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 1</div>
+        <div class="timeline-badge">Launch</div>
+        <h4>Foundation + Production & Time Tracking</h4>
+        <p>User accounts and roles for everyone. Purchase Order registry goes live. Workers start tracking time against POs with one tap. Trailer checklists with photo sign-off and manager approval. This is the highest-value module — your team sees results immediately.</p>
+        <div class="timeline-modules">
+          <span class="timeline-tag tag-core">Users & Roles</span>
+          <span class="timeline-tag tag-prod">Production</span>
+          <span class="timeline-tag tag-prod">Time Tracking</span>
+        </div>
+        <div class="timeline-live"><span class="dot"></span> Workers using the app daily</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 2</div>
+        <div class="timeline-badge">Expand</div>
+        <h4>Inventory + Smart Procurement</h4>
+        <p>Parts database with barcode/QR scanning. Sign-out flow linked to POs so every material is cost-allocated. Stock alerts and auto-reorder suggestions. The morning run sheet goes live — AI generates the consolidated pickup list every night.</p>
+        <div class="timeline-modules">
+          <span class="timeline-tag tag-inv">Inventory</span>
+          <span class="timeline-tag tag-ai">Morning Run AI</span>
+        </div>
+        <div class="timeline-live"><span class="dot"></span> Store trips reduced by 70%+</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 3</div>
+        <div class="timeline-badge">Protect</div>
+        <h4>Safety & Compliance Engine</h4>
+        <p>Fitness-for-duty declarations every shift. AI-generated PPE checklists per task. Pre-trip vehicle inspections. Incident reporting with auto-escalation. The AI safety knowledge base loaded with Alberta OHS regulations and your company SOPs. Certification tracking with expiry alerts.</p>
+        <div class="timeline-modules">
+          <span class="timeline-tag tag-safe">Safety</span>
+          <span class="timeline-tag tag-ai">AI Advisor</span>
+          <span class="timeline-tag tag-safe">Compliance</span>
+        </div>
+        <div class="timeline-live"><span class="dot"></span> Audit-ready safety documentation</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 4</div>
+        <div class="timeline-badge">Command</div>
+        <h4>Admin Hub + Marketing Pipeline</h4>
+        <p>Payroll dashboard aggregated from time tracking. PO profitability analysis with live budget vs actual. Expense tracking with receipt photos. Employee HR records and cert management. Plus: QA photos automatically feeding into marketing content — before/after showcases, team spotlights, project updates to social media.</p>
+        <div class="timeline-modules">
+          <span class="timeline-tag tag-admin">Admin</span>
+          <span class="timeline-tag tag-mkt">Marketing</span>
+        </div>
+        <div class="timeline-live"><span class="dot"></span> Full platform operational</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">Month 5+</div>
+        <div class="timeline-badge">Optimize</div>
+        <h4>AI Intelligence Layer + Continuous Improvement</h4>
+        <p>Now the system has real data. The AI starts getting smart: predictive inventory reordering, production bottleneck detection, profitability forecasting, safety trend analysis. The longer it runs, the smarter it gets. We tune, improve, and add features based on what your team actually needs.</p>
+        <div class="timeline-modules">
+          <span class="timeline-tag tag-ai">AI Intelligence</span>
+          <span class="timeline-tag tag-ai">Predictive</span>
+        </div>
+        <div class="timeline-live"><span class="dot"></span> Platform gets smarter every month</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PRICING
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-gold reveal">💎 The Investment</div>
+    <h2 class="reveal-blur" style="text-align:center;">Simple, Transparent Pricing</h2>
+    <p class="desc reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      Two phases. No hidden fees. No surprise invoices. You know exactly what you're paying and exactly what you're getting.
+    </p>
+
+    <div class="pricing-grid">
+      <!-- Build Phase -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-label">Phase 1 — Build & Deploy</div>
+        <div class="pricing-title">Development Partnership</div>
+        <div class="pricing-duration">Months 1 through 9</div>
+        <div class="pricing-amount">$8,000</div>
+        <div class="pricing-per">per month</div>
+        <ul class="pricing-features">
+          <li>Complete platform design & development</li>
+          <li>All 7 modules built and deployed</li>
+          <li>Custom AI safety knowledge base</li>
+          <li>Mobile app for all workers</li>
+          <li>Phased rollout with team training</li>
+          <li>Weekly check-ins with leadership</li>
+          <li>Unlimited revisions during build</li>
+          <li>Real-time feedback integration</li>
+        </ul>
+      </div>
+
+      <!-- Operational Phase -->
+      <div class="pricing-card reveal reveal-delay-1">
+        <div class="pricing-label">Phase 2 — Operate & Grow</div>
+        <div class="pricing-title">Operational Partnership</div>
+        <div class="pricing-duration">Month 10 onward</div>
+        <div class="pricing-amount">$5,000</div>
+        <div class="pricing-per">per month + performance bonuses</div>
+        <ul class="pricing-features">
+          <li>Ongoing platform maintenance & support</li>
+          <li>New features as the business evolves</li>
+          <li>AI tuning with your real data</li>
+          <li>Marketing content pipeline management</li>
+          <li>System monitoring & updates</li>
+          <li>Priority support for all users</li>
+          <li>Monthly performance review</li>
+          <li>Performance bonuses on outcomes</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Year 1 Summary -->
+    <div style="text-align:center; margin-bottom:48px;" class="reveal">
+      <div style="font-size:14px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:16px;">Year One Total Investment</div>
+      <div class="year-summary">
+        <div class="year-block">
+          <div class="year-amount" style="color:var(--gold);">$72,000</div>
+          <div class="year-label">Build Phase (9 mo)</div>
+        </div>
+        <div class="year-block">
+          <div class="year-amount" style="color:var(--green);">$15,000</div>
+          <div class="year-label">Operational (3 mo)</div>
+        </div>
+        <div class="year-block">
+          <div class="year-amount" style="background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$87,000</div>
+          <div class="year-label">Year 1 Total</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:var(--text-dim);">Less than the cost of one junior developer — and you get an entire platform, an AI system, and a technology partner.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PERFORMANCE BONUSES
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-green reveal">🏆 Shared Success</div>
+    <h2 class="reveal-blur" style="text-align:center;">Performance Bonuses —<br><span style="color:var(--green)">We Win When You Win</span></h2>
+    <p class="desc reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      Starting in the operational phase, monthly bonuses are tied to measurable outcomes. This isn't a vendor relationship — it's a partnership where our success is directly connected to yours.
+    </p>
+
+    <div class="bonus-grid">
+      <div class="bonus-card reveal">
+        <span class="bonus-icon">🛡</span>
+        <h4>Safety Target Hit</h4>
+        <div class="bonus-amount">+$500/mo</div>
+        <p>Monthly safety compliance stays above 95% and zero recordable incidents. Good safety is good business — and we're invested in keeping your team safe.</p>
+      </div>
+      <div class="bonus-card reveal reveal-delay-1">
+        <span class="bonus-icon">📉</span>
+        <h4>Cost Reduction</h4>
+        <div class="bonus-amount">+$500/mo</div>
+        <p>When the platform demonstrably reduces operational costs — fewer store runs, less material waste, lower insurance premiums — by measurable percentages.</p>
+      </div>
+      <div class="bonus-card reveal reveal-delay-2">
+        <span class="bonus-icon">📈</span>
+        <h4>Revenue Growth</h4>
+        <div class="bonus-amount">+$500/mo</div>
+        <p>New contracts won that were directly enabled by the safety compliance system or operational documentation. Better systems win bigger work.</p>
+      </div>
+      <div class="bonus-card reveal reveal-delay-3">
+        <span class="bonus-icon">⭐</span>
+        <h4>Discretionary</h4>
+        <div class="bonus-amount">Flexible</div>
+        <p>At the end of each quarter, we review the platform's impact together. If the results speak for themselves, we discuss where the partnership goes next.</p>
+      </div>
+    </div>
+
+    <div class="impact reveal" style="max-width:700px; margin:32px auto 0;">
+      <span class="impact-icon">🤝</span>
+      <div class="impact-text">
+        <strong>Why Bonuses Matter</strong>
+        <span>Performance bonuses mean we're not just building software and walking away. Our revenue goes up when your results go up. That alignment means we're always looking for ways to make the system better for your bottom line — not just maintaining it.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ROI
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-cyan reveal">📊 The Math</div>
+    <h2 class="reveal-blur" style="text-align:center;">Return on Investment —<br><span style="color:var(--cyan)">Conservative Estimates</span></h2>
+    <p class="desc reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      These are the low-end estimates. The real impact — especially from winning larger contracts through better safety compliance — could be multiples of this.
+    </p>
+
+    <div class="roi-box reveal">
+      <div style="font-family:var(--display); font-size:14px; font-weight:700; margin-bottom:16px; color:var(--green);">Annual Value Delivered</div>
+
+      <div class="roi-row">
+        <span>Store run consolidation (time savings)</span>
+        <span style="color:var(--green)">+$25,000 - $37,000</span>
+      </div>
+      <div class="roi-row">
+        <span>PO overrun prevention (caught early)</span>
+        <span style="color:var(--green)">+$50,000 - $100,000</span>
+      </div>
+      <div class="roi-row">
+        <span>Material waste & inventory reduction</span>
+        <span style="color:var(--green)">+$20,000 - $50,000</span>
+      </div>
+      <div class="roi-row">
+        <span>Admin time saved (payroll, receipts)</span>
+        <span style="color:var(--green)">+$15,000 - $25,000</span>
+      </div>
+      <div class="roi-row">
+        <span>Insurance premium reduction</span>
+        <span style="color:var(--green)">+$10,000 - $30,000</span>
+      </div>
+      <div class="roi-row">
+        <span>New contracts from safety compliance</span>
+        <span style="color:var(--green)">+$500,000 - $2,000,000</span>
+      </div>
+      <div class="roi-row total">
+        <span>Total Annual Value</span>
+        <span>$620,000 — $2,242,000</span>
+      </div>
+
+      <div class="roi-bottom">
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:8px;">Year 1 Investment: $87,000</div>
+        <div class="roi-multiplier">7x — 25x</div>
+        <div class="roi-multiplier-label">Return on Investment (Conservative)</div>
+      </div>
+    </div>
+
+    <div class="impact reveal" style="max-width:700px; margin:32px auto 0;">
+      <span class="impact-icon">💡</span>
+      <div class="impact-text">
+        <strong>Put Another Way</strong>
+        <span>If the platform prevents just one $75,000 PO overrun and helps you win just one additional $500,000 contract — it's already paid for itself 6x over. Everything else is gravy.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHAT'S INCLUDED (Value Stack)
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-gold reveal">📦 Everything Included</div>
+    <h2 class="reveal-blur" style="text-align:center;">What You Get —<br><span style="color:var(--gold)">The Complete Package</span></h2>
+    <p class="desc reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      If you hired separately for each of these, this is what they'd cost. You get all of them in one partnership.
+    </p>
+
+    <div class="value-stack">
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>Custom Operations Platform (7 Modules)</strong>
+          <span>Production, time tracking, inventory, safety, admin, marketing, AI intelligence</span>
+        </div>
+        <div class="value-price">$200K+</div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>Mobile App for All Workers</strong>
+          <span>PWA — download once, works offline, no App Store required</span>
+        </div>
+        <div class="value-price">$40K+</div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>AI Safety Knowledge Base</strong>
+          <span>Alberta OHS regs, company SOPs, PPE requirements, hazard guidance</span>
+        </div>
+        <div class="value-price">$50K+</div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>Smart Procurement System</strong>
+          <span>Morning run sheets, auto-reorder, route optimization, receipt capture</span>
+        </div>
+        <div class="value-price">$30K+</div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>Marketing Content Pipeline</strong>
+          <span>QA photos → social content, team spotlights, project showcases</span>
+        </div>
+        <div class="value-price">$24K+/yr</div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>Team Training & Onboarding</strong>
+          <span>Every worker, manager, and admin trained on the platform in waves</span>
+        </div>
+        <div class="value-price">$15K+</div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-check">✓</div>
+        <div class="value-text">
+          <strong>Ongoing Support, Updates & Optimization</strong>
+          <span>Not a project that ends — a partnership that evolves with your business</span>
+        </div>
+        <div class="value-price">$60K+/yr</div>
+      </div>
+
+      <div style="text-align:center; margin-top:24px; padding:20px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);" class="reveal">
+        <div style="font-size:13px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px;">If purchased separately</div>
+        <div style="font-family:var(--display); font-size:28px; font-weight:800; color:var(--text-muted); text-decoration:line-through;">$419,000+</div>
+        <div style="font-size:14px; color:var(--text-dim); margin:8px 0 4px;">Your Year 1 investment</div>
+        <div style="font-family:var(--display); font-size:36px; font-weight:900; background:linear-gradient(135deg,var(--gold),var(--orange)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">$87,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     AFTER YEAR ONE
+     ═══════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="badge badge-purple reveal">🔮 Looking Ahead</div>
+    <h2 class="reveal-blur" style="text-align:center;">After Year One —<br><span style="color:var(--purple)">Where We Go From Here</span></h2>
+    <p class="desc reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      Year one builds the foundation. After that, we sit down together and evaluate what's working, what the data says, and where the biggest opportunities are. The platform and the partnership evolve based on real results.
+    </p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; max-width:900px; margin:0 auto;">
+      <div style="background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:28px 24px;" class="reveal">
+        <div style="font-size:32px; margin-bottom:12px;">📊</div>
+        <div style="font-family:var(--display); font-size:16px; font-weight:700; margin-bottom:8px;">Review the Data</div>
+        <div style="font-size:14px; color:var(--text-dim); line-height:1.6;">After 12 months, we have real numbers: actual savings, actual time recovered, actual contracts won. We evaluate together and let the results speak.</div>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:28px 24px;" class="reveal reveal-delay-1">
+        <div style="font-size:32px; margin-bottom:12px;">🎯</div>
+        <div style="font-family:var(--display); font-size:16px; font-weight:700; margin-bottom:8px;">Adjust the Partnership</div>
+        <div style="font-size:14px; color:var(--text-dim); line-height:1.6;">If the platform is delivering massive value, we can expand scope. If the business needs have shifted, we adapt. The partnership fits the business, not the other way around.</div>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:28px 24px;" class="reveal reveal-delay-2">
+        <div style="font-size:32px; margin-bottom:12px;">🚀</div>
+        <div style="font-family:var(--display); font-size:16px; font-weight:700; margin-bottom:8px;">Keep Growing Together</div>
+        <div style="font-size:14px; color:var(--text-dim); line-height:1.6;">The AI gets smarter every month with more data. New features emerge from real usage patterns. The system that took you to $15M is the same system that takes you to $20M.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CTA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta">
+  <div class="container">
+    <h2 class="reveal-blur">Let's Build This Together.</h2>
+    <p class="reveal reveal-delay-1">
+      One platform. One partner. From $10M to $15M and beyond — through better systems, better safety, and better data. Your team deserves the best tools. Let's give them that.
+    </p>
+
+    <div class="cta-summary reveal reveal-delay-2">
+      <div class="cta-price">$8,000/mo</div>
+      <div class="cta-detail">Build phase (months 1-9) → <strong>$5,000/mo + bonuses</strong> ongoing</div>
+      <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">Year 1 total: $87,000 · ROI: 7x-25x</div>
+    </div>
+
+    <div class="powered-by reveal reveal-delay-3">
+      Prepared by AI Precision Marketing · aiprecisionmarketing.ca
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+// Scroll reveal
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-blur').forEach(el => revealObserver.observe(el));
+
+// Counter animation for cost amounts
+function animateCount(el, target, prefix='', suffix='', duration=2000) {
+  const start = performance.now();
+  function update(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const v = Math.floor(eased * target);
+    el.textContent = prefix + v.toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      const count = parseInt(entry.target.dataset.count);
+      const prefix = entry.target.dataset.prefix || '';
+      const suffix = entry.target.dataset.suffix || '';
+      animateCount(entry.target, count, prefix, suffix, 2000);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// Timeline stagger
+const timelineObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const items = entry.target.querySelectorAll('.timeline-item');
+      items.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-40px)';
+        setTimeout(() => {
+          item.style.transition = 'all 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, i * 150);
+      });
+      timelineObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.timeline').forEach(t => timelineObs.observe(t));
+
+// Value stack stagger
+const valueObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const items = entry.target.querySelectorAll('.value-item');
+      items.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-30px)';
+        setTimeout(() => {
+          item.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          item.style.opacity = '1';
+          item.style.transform = 'translateX(0)';
+        }, i * 100);
+      });
+      valueObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.value-stack').forEach(v => valueObs.observe(v));
+
+// Bonus grid stagger
+const bonusObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('.bonus-card');
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px) scale(0.95)';
+        setTimeout(() => {
+          card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1)';
+        }, i * 120);
+      });
+      bonusObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.bonus-grid').forEach(g => bonusObs.observe(g));
+
+// Magnetic hover on cards
+document.querySelectorAll('.cost-card, .bonus-card, .pricing-card, .value-item').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    card.style.transform = `translateY(-4px) perspective(1000px) rotateY(${x * 0.015}deg) rotateX(${-y * 0.015}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// Particle system
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.2;
+    this.speedY = (Math.random() - 0.5) * 0.2;
+    this.opacity = Math.random() * 0.4 + 0.1;
+    this.color = ['251,191,36','96,165,250','52,211,153','249,115,22'][Math.floor(Math.random()*4)];
+    this.pulse = Math.random() * 0.02 + 0.005;
+    this.offset = Math.random() * Math.PI * 2;
+  }
+  update(t) {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < -5) this.x = canvas.width + 5;
+    if (this.x > canvas.width + 5) this.x = -5;
+    if (this.y < -5) this.y = canvas.height + 5;
+    if (this.y > canvas.height + 5) this.y = -5;
+    this.curOp = this.opacity * (0.5 + 0.5 * Math.sin(t * this.pulse + this.offset));
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${this.curOp})`;
+    ctx.fill();
+  }
+}
+
+const pCount = Math.min(50, Math.floor(window.innerWidth / 25));
+for (let i = 0; i < pCount; i++) particles.push(new Particle());
+
+let t = 0;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  t++;
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update(t);
+    particles[i].draw();
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 100) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(251,191,36,${(1-d/100)*0.06})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
